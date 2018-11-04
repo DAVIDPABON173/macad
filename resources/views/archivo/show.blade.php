@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="archivo" class="col-md-4 col-form-label text-md-right">{{ __('Archivo cargado') }} </label>
+                            <label for="archivo_cargado" class="col-md-4 col-form-label text-md-right">{{ __('Archivo cargado') }} </label>
 
                             <div class="col-md-6" align="center">
                                 <a class="btn btn-danger" href="..{{ Storage::url($archivo->ruta) }}" target=”_blank” ><strong>{{ __('Ver PDF') }} </strong></a>
@@ -70,7 +70,13 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-12" align="right">
+                            <div class="col-md-6" align="left">
+                                <button type="submit" class="btn btn-success" method="GET" onclick= "{{ route('archivo.index')}}">
+                                    {{ __('Atras') }}
+                                </button>
+                                    
+                            </div>
+                            <div class="col-md-6" align="right">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Editar') }}
                                 </button>

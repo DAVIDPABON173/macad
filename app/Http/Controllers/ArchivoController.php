@@ -133,7 +133,8 @@ class ArchivoController extends Controller
      */
     public function destroy(Archivo $archivo)
     {
-        //
+        $archivo->delete();
+        return redirect()->route('archivo.index');
     }
 
     /**

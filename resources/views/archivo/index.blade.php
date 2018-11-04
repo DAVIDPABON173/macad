@@ -26,27 +26,43 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @for($i=0; $i< sizeof($archivos); $i++)
+                        <?php $i=1; ?>
+                        @foreach($archivos as $archivo)
                         <tr>
-                          <th scope="row">{{$i+1}}</th>
-                          <td>{{ $archivos[$i]->id }}</td>
-                          <td>{{ $archivos[$i]->documento->documento }}</td>
-                          <td>{{ $archivos[$i]->documento->prefijo }}</td>
-                          <td>{{ $archivos[$i]->referencia }}</td>
-                          <td>{{ $archivos[$i]->nombre }}</td>
-                          <td>{{ $archivos[$i]->anio }}</td>
-                          <td>{{ $archivos[$i]->descripcion }}</td>
-                          <td>{{ $archivos[$i]->ubicacion_fisica }}</td>
-                          <td>{{ $archivos[$i]->created_at }}</td>
-                          <td>{{ $archivos[$i]->updated_at }}</td>
-                          <td><a type="button" class="btn btn-info" href="{{ route('archivo.show' , $archivos[$i]->id) }}">VER</a></td>
-                          <td><a type="button" class="btn btn-info" href="{{ route('archivo.edit' , $archivos[$i]->id) }}">BORRAR</a></td>
+                          <th scope="row">{{$i}}</th>
+                          <td>{{ $archivo->id }}</td>
+                          <td>{{ $archivo->documento->documento }}</td>
+                          <td>{{ $archivo->documento->prefijo }}</td>
+                          <td>{{ $archivo->referencia }}</td>
+                          <td>{{ $archivo->nombre }}</td>
+                          <td>{{ $archivo->anio }}</td>
+                          <td>{{ $archivo->descripcion }}</td>
+                          <td>{{ $archivo->ubicacion_fisica }}</td>
+                          <td>{{ $archivo->created_at }}</td>
+                          <td>{{ $archivo->updated_at }}</td>
+                          <td>  
+                            <button type="submit" class="btn btn-info" onclick="show()" > {{ __('VER') }}
+                            </button>
+                          </td>
+                          <td>  
+                            <button type="submit" class="btn btn-danger" onclick="send_delete()"> {{ __('ELIMINAR') }}
+                            </button>
+                          </td>
                         </tr>
-                        @endfor
+                        <?php $i++; ?>
+                        @endforeach
 
                       </tbody>
                       {{ $archivos->links() }}
                     </table>
+                    <form method="POST" action="{{ route('archivo.destroy' , $archivo) }}" name="delete_form">
+                      {{ csrf_field() }}
+                      {{ method_field('DELETE') }}
+                    </form>
+
+                    <form method="GET" action="{{ route('archivo.show' , $archivo->id) }}" name="show_form">
+                      {{ csrf_field() }}
+                    </form>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -60,4 +76,21 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('foot')
+  <script>
+    function send_delete()
+    {
+      document.delete_form.submit(); 
+    }
+  </script>
+
+  <script>
+    function show()
+    {
+      document.show_form.submit(); 
+    }
+  </script>
 @endsection
