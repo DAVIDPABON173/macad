@@ -71,10 +71,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6" align="left">
-                                <button type="submit" class="btn btn-success" method="GET" onclick= "{{ route('archivo.index')}}">
-                                    {{ __('Atras') }}
-                                </button>
-                                    
+                                <a href="{{ route('archivo.index') }}" class="btn btn-success">{{ __('Atras') }}</a>
                             </div>
                             <div class="col-md-6" align="right">
                                 <button type="submit" class="btn btn-primary">
