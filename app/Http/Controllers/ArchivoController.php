@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Archivo;
+use App\Documento;
 use Illuminate\Http\Request;
 
 class ArchivoController extends Controller
@@ -14,7 +15,9 @@ class ArchivoController extends Controller
      */
     public function index()
     {
-        //
+        $archivos = Archivo::with('documento')->get();
+        $archivos = Archivo::paginate(4);
+        return view('archivo.index' , compact('archivos'));
     }
 
     /**
@@ -35,10 +38,9 @@ class ArchivoController extends Controller
      */
     public function store(Request $request)
     {
-        //return dd($request->archivo);
         //validacion
         $this->validate($request, [
-            'referencia' => 'required|pdf',
+            'referencia' => 'required|string',
             'nombre' => 'required|string',
             'fecha' => 'required|date',
             'anio' => 'required|string',
@@ -60,7 +62,8 @@ class ArchivoController extends Controller
         $archivo->ruta = $ruta;
         $archivo->save();
 
-        return 'REGISTRO EXITOSO.';
+        //Redireccionar
+        return redirect()->route('archivo.show' , $archivo);
     }
 
     /**
@@ -71,7 +74,7 @@ class ArchivoController extends Controller
      */
     public function show(Archivo $archivo)
     {
-        //
+        return view('archivo.show' , compact('archivo'));
     }
 
     /**
@@ -82,7 +85,7 @@ class ArchivoController extends Controller
      */
     public function edit(Archivo $archivo)
     {
-        //
+        return view('archivo.edit' , compact('archivo'));
     }
 
     /**
@@ -94,7 +97,32 @@ class ArchivoController extends Controller
      */
     public function update(Request $request, Archivo $archivo)
     {
-        //
+        //validacion
+        $this->validate($request, [
+            'referencia' => 'required|string',
+            'nombre' => 'required|string',
+            'fecha' => 'required|date',
+            'anio' => 'required|string',
+            'descripcion' => 'required|string'
+        ]);
+
+        if ($request->hasFile('archivo')) {
+            $ruta = $request->file('archivo')->store('public/'.date('Y').'/'.$this->getNumeroSemana().'/documento');
+            $archivo->ruta = $ruta;
+        }
+
+        //update
+        $archivo->referencia = $request->referencia;
+        $archivo->nombre = $request->nombre;
+        $archivo->fecha = $request->fecha;
+        $archivo->anio = $request->anio;
+        $archivo->descripcion = $request->descripcion;
+        $archivo->ubicacion_fisica = $request->ubicacion_fisica;
+        $archivo->documento_id = 1;
+        $archivo->save();
+
+        //Redireccionar
+        return redirect()->route('archivo.show' , $archivo);
     }
 
     /**
