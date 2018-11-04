@@ -41,12 +41,17 @@
                           <td>{{ $archivo->created_at }}</td>
                           <td>{{ $archivo->updated_at }}</td>
                           <td>  
-                            <button type="submit" class="btn btn-info" onclick="show()" > {{ __('VER') }}
-                            </button>
+                            <form method="GET" action="{{ route('archivo.show' , $archivo->id) }}" name="show_form">
+                                <button type="submit" class="btn btn-info"> {{ __('VER') }}</button>                            
+                                {{ csrf_field() }}
+                            </form>
                           </td>
                           <td>  
-                            <button type="submit" class="btn btn-danger" onclick="send_delete()"> {{ __('ELIMINAR') }}
-                            </button>
+                            <form method="POST" action="{{ route('archivo.destroy' , $archivo) }}" name="delete_form">
+                                <button type="submit" class="btn btn-danger">{{ __('ELIMINAR') }}</button>
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                            </form>
                           </td>
                         </tr>
                         <?php $i++; ?>
@@ -55,15 +60,6 @@
                       </tbody>
                       {{ $archivos->links() }}
                     </table>
-                    <form method="POST" action="{{ route('archivo.destroy' , $archivo) }}" name="delete_form">
-                      {{ csrf_field() }}
-                      {{ method_field('DELETE') }}
-                    </form>
-
-                    <form method="GET" action="{{ route('archivo.show' , $archivo->id) }}" name="show_form">
-                      {{ csrf_field() }}
-                    </form>
-
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -79,18 +75,5 @@
 @endsection
 
 
-@section('foot')
-  <script>
-    function send_delete()
-    {
-      document.delete_form.submit(); 
-    }
-  </script>
-
-  <script>
-    function show()
-    {
-      document.show_form.submit(); 
-    }
-  </script>
+@section('foot')  
 @endsection
