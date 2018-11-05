@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Archivo;
-use App\Documento;
+use App\Categoria;
 use Illuminate\Http\Request;
 
 class ArchivoController extends Controller
@@ -27,7 +27,8 @@ class ArchivoController extends Controller
      */
     public function create()
     {
-        return view('archivo.create');
+        $categorias = Categoria::with('documentos')->get();
+        return view('archivo.create', compact('categorias'));
     }
 
     /**

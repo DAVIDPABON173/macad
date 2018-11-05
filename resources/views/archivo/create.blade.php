@@ -13,10 +13,47 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="referencia" class="col-md-4 col-form-label text-md-right">{{ __('Referencia') }}</label>
+                            <label for="categoria" class="col-md-4 col-form-label text-md-right">{{ __('Selecciona una Categoria') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="referencia" type="text" class="form-control{{ $errors->has('referencia') ? ' is-invalid' : '' }}" name="referencia" value="{{ old('referencia') }}" required autofocus>
+                            <div class="dropdown col-md-6" >
+                                <button class="btn btn-info dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Categorias
+                                <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                    @foreach($categorias as $categoria)
+                                    <li role="presentation"><a role="menuitem" tabindex="{{ $categoria->id }}" href="#">{{ $categoria->categoria }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="informacion" class="col-md-12 col-form-label text-md-center">
+                                <strong>{{ __('A continuacion, ingresa los datos básico del archivo a cargar según la categoría seleeccionada') }}</strong>
+                            </label>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="documento" class="col-md-4 col-form-label text-md-right">{{ __('Documento') }}</label>
+
+                            <div class="dropdown col-md-6" >
+                                <button class="btn btn-info dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Documentos
+                                <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                    @foreach($categorias as $categoria)
+                                    <li role="presentation"><a role="menuitem" tabindex="{{ $categoria->id }}" href="#">{{ $categoria->categoria }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="prefijo" class="col-md-4 col-form-label text-md-right">{{ __('Prefijo') }}</label>
+
+                            <div class="col-md-6 row">
+                                <label for="prefijo" class="col-md-4 col-form-label text-md-right">
+                                <strong>{{ __('X-YY-Z-') }}</strong>
+                                </label>
+                                <input id="referencia" type="text" class="col-md-8 form-control{{ $errors->has('referencia') ? ' is-invalid' : '' }}" name="referencia" value="{{ old('referencia') }}" required autofocus>
 
                                 @if ($errors->has('referencia'))
                                     <span class="invalid-feedback" role="alert">
@@ -25,6 +62,8 @@
                                 @endif
                             </div>
                         </div>
+
+
 
                         <div class="form-group row">
                             <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Archivo') }}</label>
