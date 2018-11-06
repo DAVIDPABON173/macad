@@ -10,8 +10,14 @@ class Documento extends Model
 
     protected $fillable = ['id', 'documento', 'prefijo', 'categoria_id', 'created_at', 'updated_at'];
 
+    public function categoria()
+	{
+		return $this->belongsTo('App\Categoria');
+	}
+
     public function archivos()
     {
     	return $this->hasMany('App\Archivo');
     }
+
 }

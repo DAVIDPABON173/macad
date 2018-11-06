@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Documento;
+use App\Categoria;
 use Illuminate\Http\Request;
 
 class DocumentoController extends Controller
@@ -14,7 +15,9 @@ class DocumentoController extends Controller
      */
     public function index()
     {
-        //
+        $documentos = Documento::with('categoria')->get();
+        $documentos = Documento::paginate(4);
+        return view('documento.index' , compact('documentos'));
     }
 
     /**
@@ -24,7 +27,8 @@ class DocumentoController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Categoria::all();
+        return view('documento.create', compact('categorias'));
     }
 
     /**
@@ -35,7 +39,22 @@ class DocumentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validacion
+        $this->validate($request, [
+            'categoria_id' => 'required|integer',
+            'documento' => 'required|string',
+            'prefijo' => 'required|string'
+        ]);
+
+        //Almacenamiento
+        $documento = new Documento;
+        $documento->categoria_id = $request->categoria_id;
+        $documento->documento = $request->documento;
+        $documento->prefijo = $request->prefijo;
+        $documento->save();
+
+        //Redireccionar
+        return redirect()->route('documento.index');
     }
 
     /**
@@ -46,7 +65,7 @@ class DocumentoController extends Controller
      */
     public function show(Documento $documento)
     {
-        //
+        return view('documento.show' , compact('documento'));
     }
 
     /**
@@ -57,7 +76,8 @@ class DocumentoController extends Controller
      */
     public function edit(Documento $documento)
     {
-        //
+        $categorias = Categoria::where('id' , '<>' , $documento->categoria_id)->get();
+        return view('documento.edit' , compact('documento' , 'categorias'));
     }
 
     /**
@@ -82,4 +102,5 @@ class DocumentoController extends Controller
     {
         //
     }
+
 }
