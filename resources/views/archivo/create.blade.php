@@ -24,7 +24,7 @@
                                 <select id="categoria" name="categoria" class="form-control" onchange="loadDocuments();">
                                     <option value="null" disabled selected>Categorías</option>
                                     @foreach($categorias as $categoria)
-                                    <option value="{{ $categoria->documentos }}">{{ $categoria->categoria }}</option>
+                                    <option value="{{ $categoria->id }}" data-info="{{ $categoria->documentos }}">{{ $categoria->categoria }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -57,8 +57,6 @@
                                 
                             </div>
                         </div>
-
-
 
                         <div class="form-group row">
                             <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Archivo') }}</label>
@@ -107,7 +105,7 @@
                             <label for="descripcion" class="col-md-4 col-form-label text-md-right">{{ __('Descripcion') }}</label>
 
                             <div class="col-md-6">                                
-                                <textarea class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" id="descripcion" name="descripcion" value="{{ old('descripcion') }}" rows="3" required autofocus></textarea>
+                                <textarea class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" id="descripcion" name="descripcion" rows="3" required autofocus></textarea>
                                 @if ($errors->has('descripcion'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('descripcion') }}</strong>

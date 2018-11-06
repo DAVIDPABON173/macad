@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('EDITAR ARCHIVO') }}</div>
-
+                <input type="hidden" name="datos" id="datos" value="{{$archivo}}">
                 <div class="card-body">
                     <form method="POST" action="{{ route('archivo.update' , $archivo->id) }}"
                     enctype="multipart/form-data">
@@ -14,16 +14,44 @@
                         {{ method_field('PUT') }}
 
                         <div class="form-group row">
-                            <label for="referencia" class="col-md-4 col-form-label text-md-right">{{ __('Referencia') }}</label>
+                            <label for="categoria" class="col-md-4 col-form-label text-md-right">{{ __('Selecciona una Categoría') }}</label>
+
+                            <div class="dropdown col-md-6" >
+                                <select id="categoria" name="categoria" class="form-control" onchange="loadDocuments();">
+                                    <option value="null" disabled selected>Categorías</option>
+                                    @foreach($categorias as $categoria)
+                                    <option value="{{ $categoria->id }}" data-info="{{ $categoria->documentos }}">{{ $categoria->categoria }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>                        
+
+                        <div class="form-group row">
+                            <label for="documento" class="col-md-4 col-form-label text-md-right">{{ __('Documento') }}</label>
+                            <div class="dropdown col-md-6" >
+                                <select id="documento" name="documento" class="form-control" onchange="setPrefix()">
+                                    <option value="{{ $archivo->documento_id }}" selected>{{ $archivo->documento->documento }}</option>                           
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="prefijo" class="col-md-4 col-form-label text-md-right">{{ __('Prefijo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="referencia" type="text" class="form-control{{ $errors->has('referencia') ? ' is-invalid' : '' }}" name="referencia" value="{{ $archivo->referencia }}" required autofocus>
-
-                                @if ($errors->has('referencia'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('referencia') }}</strong>
-                                    </span>
-                                @endif
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="lbl_prefijo"><strong>{{ $archivo->documento->prefijo }}</strong></span>
+                                    </div>
+                                    <input id="referencia" type="text" class="form-control{{ $errors->has('referencia') ? ' is-invalid' : '' }}" name="referencia" value="{{ $archivo->referencia }}" required autofocus>
+                                    @if ($errors->has('referencia'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('referencia') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                
                             </div>
                         </div>
 
@@ -40,7 +68,6 @@
                                 @endif
                             </div>
                         </div>
-
 
                         <div class="form-group row">
                             <label for="fecha" class="col-md-4 col-form-label text-md-right">{{ __('Fecha') }}</label>
@@ -73,9 +100,8 @@
                         <div class="form-group row">
                             <label for="descripcion" class="col-md-4 col-form-label text-md-right">{{ __('Descripcion') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="descripcion" type="text" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" name="descripcion" value="{{ $archivo->descripcion }}" required autofocus>
-
+                            <div class="col-md-6">                                
+                                <textarea class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" id="descripcion" name="descripcion" rows="3" required autofocus>{{ $archivo->descripcion }}</textarea>
                                 @if ($errors->has('descripcion'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('descripcion') }}</strong>
@@ -110,15 +136,18 @@
                             <label for="archivo" class="col-md-4 col-form-label text-md-right">{{ __('Archivo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="archivo" type="file" class="form-control{{ $errors->has('archivo') ? ' is-invalid' : '' }}" name="archivo" value="{{ old('archivo') }}" >
-
-                                @if ($errors->has('archivo'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('archivo') }}</strong>
-                                    </span>
-                                @endif
+                                <div class="custom-file">
+                                    <input id="archivo" name="archivo" type="file" class="custom-file-input {{ $errors->has('archivo') ? ' is-invalid' : '' }}" value="{{ old('archivo') }}" onchange="getFileName('archivo','custom-file-label')">
+                                    <label class="custom-file-label" for="archivo">Seleccionar Archivo</label>
+                                    @if ($errors->has('archivo'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('archivo') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6" align="left">
                                 <button type="submit" class="btn btn-danger" action="{{ route('archivo.show' , $archivo->id) }}">
@@ -142,3 +171,8 @@
     </div>
 </div>
 @endsection
+<script>
+    $(document).ready(function(){
+    defaulCmbArchivoEdit();
+    });
+</script>

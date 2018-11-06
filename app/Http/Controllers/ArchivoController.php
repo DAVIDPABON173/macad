@@ -59,7 +59,7 @@ class ArchivoController extends Controller
         $archivo->anio = $request->anio;
         $archivo->descripcion = $request->descripcion;
         $archivo->ubicacion_fisica = $request->ubicacion_fisica;
-        $archivo->documento_id = 1;
+        $archivo->documento_id = $request->documento;
         $archivo->ruta = $ruta;
         $archivo->save();
 
@@ -86,7 +86,8 @@ class ArchivoController extends Controller
      */
     public function edit(Archivo $archivo)
     {
-        return view('archivo.edit' , compact('archivo'));
+        $categorias = Categoria::with('documentos')->get();
+        return view('archivo.edit' , compact('archivo', 'categorias'));
     }
 
     /**
@@ -119,7 +120,7 @@ class ArchivoController extends Controller
         $archivo->anio = $request->anio;
         $archivo->descripcion = $request->descripcion;
         $archivo->ubicacion_fisica = $request->ubicacion_fisica;
-        $archivo->documento_id = 1;
+        $archivo->documento_id = $request->documento;
         $archivo->save();
 
         //Redireccionar

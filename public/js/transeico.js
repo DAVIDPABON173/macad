@@ -1,5 +1,5 @@
 function loadDocuments() {
-	let documentos = JSON.parse($('#categoria').val());	
+	let documentos = $('#categoria').find('option:selected').data('info');
 	let html = '<option value="null" disabled selected>Documentos</option>'
 	documentos.forEach(function(item, index){
 		html += '<option value="'+item.id+'" data-prefix="'+item.prefijo+'">'+item.documento+'</option>';
@@ -14,4 +14,11 @@ function setPrefix() {
 
 function getFileName(file, label) {	
 	$('.'+label).text($('#'+file).val().split('\\')[2]);
+}
+
+function defaulCmbArchivoEdit() {
+	console.log($('#datos').val())
+	/*$('#categoria').val(data.id_seleccionado);
+	this.loadDocuments();
+	$('#documento').val(data.id_seleccionado);*/
 }

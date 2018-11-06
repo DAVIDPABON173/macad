@@ -13,21 +13,45 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="referencia" class="col-md-4 col-form-label text-md-right">{{ __('Referencia') }}</label>
+                            <label for="categoria" class="col-md-4 col-form-label text-md-right">{{ __('Categoría') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="referencia" type="text" class="form-control{{ $errors->has('referencia') ? ' is-invalid' : '' }}" name="referencia" value="{{ $archivo->referencia }}" readonly="readonly">
+                            <div class="dropdown col-md-6" >
+                                <select id="categoria" name="categoria" class="form-control" disabled>
+                                    <option value="{{ $archivo->documento->categoria_id }}">{{ $archivo->documento->categoria->categoria }}</option>
+                                </select>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="documento" class="col-md-4 col-form-label text-md-right">{{ __('Documento') }}</label>
+                            <div class="dropdown col-md-6" >
+                                <select id="documento" name="documento" class="form-control" disabled>
+                                    <option value="{{ $archivo->documento_id }}">{{ $archivo->documento->documento }}</option>                             
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="prefijo" class="col-md-4 col-form-label text-md-right">{{ __('Prefijo') }}</label>
+
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="lbl_prefijo"><strong>{{ $archivo->documento->prefijo }}</strong></span>
+                                    </div>
+                                    <input id="referencia" type="text" class="form-control{{ $errors->has('referencia') ? ' is-invalid' : '' }}" name="referencia" value="{{ $archivo->referencia }}" readonly="readonly">
+                                </div>
+                                
+                            </div>
+                        </div>    
 
                         <div class="form-group row">
                             <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Archivo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{ $archivo->nombre }}" readonly="readonly">
+                                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{ $archivo->nombre }}"readonly="readonly">
                             </div>
                         </div>
-
 
                         <div class="form-group row">
                             <label for="fecha" class="col-md-4 col-form-label text-md-right">{{ __('Fecha') }}</label>
@@ -48,8 +72,8 @@
                         <div class="form-group row">
                             <label for="descripcion" class="col-md-4 col-form-label text-md-right">{{ __('Descripcion') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="descripcion" type="text" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" name="descripcion" value="{{ $archivo->descripcion }}" readonly="readonly">
+                            <div class="col-md-6">                                
+                                <textarea class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" id="descripcion" name="descripcion" rows="3" readonly="readonly">{{ $archivo->descripcion }}</textarea>
                             </div>
                         </div>
 
@@ -58,8 +82,9 @@
 
                             <div class="col-md-6">
                                 <input id="ubicacion_fisica" type="text" class="form-control{{ $errors->has('ubicacion_fisica') ? ' is-invalid' : '' }}" name="ubicacion_fisica" value="{{ $archivo->ubicacion_fisica }}" readonly="readonly">
+
                             </div>
-                        </div>
+                        </div>   
 
                         <div class="form-group row">
                             <label for="archivo_cargado" class="col-md-4 col-form-label text-md-right">{{ __('Archivo cargado') }} </label>
