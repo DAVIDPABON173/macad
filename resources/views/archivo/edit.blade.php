@@ -6,7 +6,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('EDITAR ARCHIVO') }}</div>
+
                 <input type="hidden" name="datos" id="datos" value="{{$archivo}}">
+
                 <div class="card-body">
                     <form method="POST" action="{{ route('archivo.update' , $archivo->id) }}"
                     enctype="multipart/form-data">
@@ -20,7 +22,12 @@
                                 <select id="categoria" name="categoria" class="form-control" onchange="loadDocuments();">
                                     <option value="null" disabled selected>Categorías</option>
                                     @foreach($categorias as $categoria)
-                                    <option value="{{ $categoria->id }}" data-info="{{ $categoria->documentos }}">{{ $categoria->categoria }}</option>
+                                        @if ( $categoria->id==$archivo->documento->categoria->id )
+                                            <option value="{{ $categoria->id }}" data-info="{{ $categoria->documentos }}" selected>{{ $categoria->categoria }}</option>
+                                        @else
+                                            <option value="{{ $categoria->id }}" data-info="{{ $categoria->documentos }}">{{ $categoria->categoria }}</option>
+                                        @endif
+                                        
                                     @endforeach
                                 </select>
                             </div>
@@ -30,7 +37,8 @@
                             <label for="documento" class="col-md-4 col-form-label text-md-right">{{ __('Documento') }}</label>
                             <div class="dropdown col-md-6" >
                                 <select id="documento" name="documento" class="form-control" onchange="setPrefix()">
-                                    <option value="{{ $archivo->documento_id }}" selected>{{ $archivo->documento->documento }}</option>                           
+                                    <option value="null" disabled>Documentos</option>
+                                    <option value="{{ $archivo->documento_id }}" selected>{{ $archivo->documento->documento }}</option>
                                 </select>
                             </div>
                         </div>
@@ -171,8 +179,4 @@
     </div>
 </div>
 @endsection
-<script>
-    $(document).ready(function(){
-    defaulCmbArchivoEdit();
-    });
-</script>
+

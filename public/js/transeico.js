@@ -15,10 +15,3 @@ function setPrefix() {
 function getFileName(file, label) {	
 	$('.'+label).text($('#'+file).val().split('\\')[2]);
 }
-
-function defaulCmbArchivoEdit() {
-	console.log($('#datos').val())
-	/*$('#categoria').val(data.id_seleccionado);
-	this.loadDocuments();
-	$('#documento').val(data.id_seleccionado);*/
-}
