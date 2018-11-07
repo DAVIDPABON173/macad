@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-16">
             <div class="card">
-                <div class="card-header">LISTA DE ARCHIVOS CARGADOS EN MACAD</div>
+                <div class="card-header" align="center"><strong>LISTA DE ARCHIVOS CARGADOS EN MACAD</strong></div>
 
                     <table class="table table-striped">
                       <thead>

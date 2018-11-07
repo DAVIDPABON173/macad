@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Categoria;
+use App\Documento;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
@@ -14,7 +15,6 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::get();
         $categorias = Categoria::paginate(10);
         return view('categoria.index' , compact('categorias')); 
     }
@@ -71,7 +71,7 @@ class CategoriaController extends Controller
      */
     public function edit(Categoria $categoria)
     {
-        return view('categoria.edit' , compact('categorias'));
+        return view('categoria.edit' , compact('categoria'));
     }
 
     /**
@@ -85,11 +85,13 @@ class CategoriaController extends Controller
     {
         //validacion
         $this->validate($request, [
-            'categoria' => 'required|string'
+            'categoria' => 'required|string',
+            'descripcion' => 'required|string'
         ]);
 
         //update
         $categoria->categoria = $request->categoria;
+        $categoria->descripcion = $request->descripcion;
         $categoria->save();
 
         //Redireccionar
@@ -108,12 +110,12 @@ class CategoriaController extends Controller
     }
 
     /**
-     *
+     * Metodo que lista todos loos documentos que pertenecen a una categoria
      * @return \Illuminate\Http\Response
      */
     public function misDocumentos(Categoria $categoria)
     {
-        $categoria = Categoria::find($categoria->id)->with('documentos')->get();
-        return view('categoria.index' , compact('categorias')); 
+        $documentos = Documento::where(['categoria_id' => $categoria->id])->with('categoria')->paginate(4);
+        return view('documento.index' , compact('documentos'));
     }
 }

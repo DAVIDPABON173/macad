@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Documento;
 use App\Categoria;
+use App\Archivo;
 use Illuminate\Http\Request;
 
 class DocumentoController extends Controller
@@ -54,7 +55,7 @@ class DocumentoController extends Controller
         $documento->save();
 
         //Redireccionar
-        return redirect()->route('documento.index');
+        return redirect()->route('documento.show', compact($documento));
     }
 
     /**
@@ -89,7 +90,21 @@ class DocumentoController extends Controller
      */
     public function update(Request $request, Documento $documento)
     {
-        //
+        //validacion
+        $this->validate($request, [
+            'categoria_id' => 'required|integer',
+            'documento' => 'required|string',
+            'prefijo' => 'required|string'
+        ]);
+
+        //Almacenamiento
+        $documento->categoria_id = $request->categoria_id;
+        $documento->documento = $request->documento;
+        $documento->prefijo = $request->prefijo;
+        $documento->save();
+
+        //Redireccionar
+        return redirect()->route('documento.show', compact('documento'));
     }
 
     /**
@@ -102,5 +117,17 @@ class DocumentoController extends Controller
     {
         //
     }
+
+
+    /**
+     * Metodo que lista todos loos documentos que pertenecen a una categoria
+     * @return \Illuminate\Http\Response
+     */
+    public function misArchivos(Categoria $documento)
+    {
+        $archivos = Archivo::where(['documento_id' => $documento->id])->paginate(4);
+        return view('archivo.index' , compact('archivos'));
+    }
+
 
 }

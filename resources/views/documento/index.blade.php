@@ -5,8 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-16">
             <div class="card">
-                <div class="card-header">CONFIGURACIÓN: LISTA DE DOCUMENTOS-CATEGORIAS CARGADOS EN MACAD</div>
+                <div class="card-header" align="center"><strong>TIPOS DE DOCUMENTOS</strong></div>
 
+                    <div class="alert alert-success" role="alert">
+                            <strong>{{ __('*Registros Tipos de Documentos*  - En esta vista, podras optener información sobre los tipos de documentos existentes en MACAD') }}</strong>
+                    </div>
                     <table class="table table-striped">
                       <thead>
                         <tr>
@@ -17,7 +20,7 @@
                           <th scope="col">CATEGORIA</th>
                           <th scope="col">CREADO</th>
                           <th scope="col">MODIFICADO</th>
-                          <th scope="col">MIS DOCUMENTOS</th>
+                          <th scope="col">ARCHIVOS</th>
                           <th scope="col">DETALLES</th>
                           <th scope="col">BORRAR</th>
                         </tr>
@@ -35,13 +38,13 @@
                           <td>{{ $documento->updated_at }}</td>
                           <td>  
                             <form method="GET" action="{{ route('documento.show' , $documento->id) }}" name="show_form">
-                                <button type="submit" class="btn btn-success"> {{ __('MIS DOCUMENTOS') }}</button>                            
+                                <button type="submit" class="btn btn-info"> {{ __('DETALLES') }}</button>                            
                                 {{ csrf_field() }}
                             </form>
                           </td>
                           <td>  
-                            <form method="GET" action="{{ route('documento.show' , $documento->id) }}" name="show_form">
-                                <button type="submit" class="btn btn-info"> {{ __('DETALLES') }}</button>                            
+                            <form method="GET" action="{{ route('documento.misArchivos' , $documento->id) }}" name="show_form">
+                                <button type="submit" class="btn btn-success"> {{ __('VER ARCHIVOS') }}</button>                            
                                 {{ csrf_field() }}
                             </form>
                           </td>

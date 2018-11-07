@@ -10,7 +10,7 @@
                 <div class="card-body">
 
                     <div class="alert alert-info" role="alert">
-                            <strong>{{ __('A continuación, se presenta informacion básica de la categoría seleccionada') }}</strong>
+                            <strong>{{ __('InformaciÓn básica de la categoría seleccionada') }}</strong>
                     </div>
 
                     <form method="GET" action="{{ route('categoria.edit' , $categoria->id) }}"
@@ -21,7 +21,7 @@
                             <label for="categoria" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Categoria') }}</label>
 
                             <div class="col-md-6">
-                                <input id="categoria" type="text" class="form-control{{ $errors->has('categoria') ? ' is-invalid' : '' }}" name="categoria" value="{{ $categoria->categoria }}">
+                                <input id="categoria" type="text" class="form-control{{ $errors->has('categoria') ? ' is-invalid' : '' }}" name="categoria" value="{{ $categoria->categoria }}" readonly="readonly">
                             </div>
                         </div>
 
@@ -29,7 +29,7 @@
                             <label for="descripcion" class="col-md-4 col-form-label text-md-right">{{ __('Descripcion') }}</label>
 
                             <div class="col-md-6">                                
-                                <textarea class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" id="descripcion" name="descripcion" rows="3">{{ $categoria->descripcion }}</textarea>
+                                <textarea class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" id="descripcion" name="descripcion" rows="3" readonly="readonly">{{ $categoria->descripcion }}</textarea>
                             </div>
                         </div>
 
