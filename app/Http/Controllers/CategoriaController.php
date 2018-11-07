@@ -14,7 +14,9 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        $categorias = Categoria::get();
+        $categorias = Categoria::paginate(10);
+        return view('categoria.index' , compact('categorias')); 
     }
 
     /**
@@ -24,7 +26,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('categoria.create');
     }
 
     /**
@@ -35,7 +37,19 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validacion
+        $this->validate($request, [
+            'categoria' => 'required|string',
+            'descripcion' => 'required|string'
+        ]);
+
+        //Almacenamiento
+        $categoria = new Categoria;
+        $categoria->categoria = $request->categoria;
+        $categoria->save();
+
+        //Redireccionar
+        return redirect()->route('categoria.show' , $categoria);
     }
 
     /**
@@ -46,7 +60,7 @@ class CategoriaController extends Controller
      */
     public function show(Categoria $categoria)
     {
-        //
+        return view('categoria.show' , compact('categoria'));
     }
 
     /**
@@ -57,7 +71,7 @@ class CategoriaController extends Controller
      */
     public function edit(Categoria $categoria)
     {
-        //
+        return view('categoria.edit' , compact('categorias'));
     }
 
     /**
@@ -69,7 +83,17 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, Categoria $categoria)
     {
-        //
+        //validacion
+        $this->validate($request, [
+            'categoria' => 'required|string'
+        ]);
+
+        //update
+        $categoria->categoria = $request->categoria;
+        $categoria->save();
+
+        //Redireccionar
+        return redirect()->route('categoria.show' , $categoria);
     }
 
     /**
@@ -81,5 +105,15 @@ class CategoriaController extends Controller
     public function destroy(Categoria $categoria)
     {
         //
+    }
+
+    /**
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function misDocumentos(Categoria $categoria)
+    {
+        $categoria = Categoria::find($categoria->id)->with('documentos')->get();
+        return view('categoria.index' , compact('categorias')); 
     }
 }

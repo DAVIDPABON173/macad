@@ -8,7 +8,7 @@ class Categoria extends Model
 {
 	protected $table = 'categorias';
 
-    protected $fillable = ['id', 'categoria', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'categoria', 'descripcion', 'created_at', 'updated_at'];
 
     public function documentos()
     {

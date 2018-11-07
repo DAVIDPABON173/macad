@@ -19,6 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::resource('/documento', 'DocumentoController');
+
 Route::resource('/archivo', 'ArchivoController');
 
-Route::resource('/documento', 'DocumentoController');
+Route::get('/categoria/{categoria}' , 'CategoriaController@show')->name('categoria.show');
+Route::get('/categoria/{categoria}/edit' , 'CategoriaController@edit')->name('categoria.edit');
+Route::get('/categoria/' , 'CategoriaController@index')->name('categoria.index');
+Route::post('/categoria/' , 'CategoriaController@store');
