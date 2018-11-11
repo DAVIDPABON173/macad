@@ -8,9 +8,6 @@
                 <div class="card-header">{{ __('EDITAR TIPO DOCUMENTO') }}</div>
 
                 <div class="card-body">
-                    <div class="alert alert-info" role="alert">
-                            <strong>{{ __('Tenga en cuenta, que los datos modificados sobre el tipo de documento, afectará directamente a los archivos registrados que pertenecen a este tipo de documento.') }}</strong>
-                    </div>
                     
                     <form method="POST" action="{{ route('documento.update' , $documento->id) }}">
                         @csrf
@@ -61,10 +58,10 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6" align="left">
-                                <a href="{{ route('documento.show' , $documento->id) }}" class="btn btn-danger">{{ __('Cancelar') }}</a>
+                                <a href="{{ route('documento.show' , $documento->id) }}" class="btn btn-oval btn-danger">{{ __('Cancelar') }}</a>
                             </div>
                             <div class="col-md-6" align="right">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-oval btn-primary">
                                     {{ __('Actualizar') }}
                                 </button>
                                     

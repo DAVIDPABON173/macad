@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-16">
             <div class="card">
-                <div class="card-header" align="center"><strong>LISTA DE ARCHIVOS CARGADOS EN MACAD</strong></div>
-
+                <div class="card-header" align="center"><strong>LISTA DE ARCHIVOS</strong></div>
+                    <p><strong>En esta vista, podras optener información sobre los archivos cargados en MACAD</strong></p>
                     <table class="table table-striped">
-                      <thead>
+                      <thead  align="center">
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">ID</th>
@@ -25,7 +25,7 @@
                           <th scope="col">BORRAR</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody  align="center"> 
                         <?php $i=1; ?>
                         @foreach($archivos as $archivo)
                         <tr>
@@ -42,13 +42,13 @@
                           <td>{{ $archivo->updated_at }}</td>
                           <td>  
                             <form method="GET" action="{{ route('archivo.show' , $archivo->id) }}" name="show_form">
-                                <button type="submit" class="btn btn-info"> {{ __('VER') }}</button>                            
+                                <button type="submit" class="btn btn-oval btn-info"> {{ __('VER') }}</button>                            
                                 {{ csrf_field() }}
                             </form>
                           </td>
                           <td>  
                             <form method="POST" action="{{ route('archivo.destroy' , $archivo) }}" name="delete_form">
-                                <button type="submit" class="btn btn-danger">{{ __('ELIMINAR') }}</button>
+                                <button type="submit" class="btn btn-oval btn-danger">{{ __('X') }}</button>
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                             </form>

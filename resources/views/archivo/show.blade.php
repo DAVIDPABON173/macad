@@ -90,16 +90,16 @@
                             <label for="archivo_cargado" class="col-md-4 col-form-label text-md-right">{{ __('Archivo cargado') }} </label>
 
                             <div class="col-md-6" align="center">
-                                <a class="btn btn-danger" href="..{{ Storage::url($archivo->ruta) }}" target=”_blank” ><strong>{{ __('Ver PDF') }} </strong></a>
+                                <a class="btn btn-oval btn-danger" href="..{{ Storage::url($archivo->ruta) }}" target=”_blank” ><strong>{{ __('Ver PDF') }} </strong></a>
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6" align="left">
-                                <a href="{{ route('archivo.index') }}" class="btn btn-success">{{ __('Atras') }}</a>
+                                <a href="{{ route('archivo.index') }}" class="btn btn-oval btn-success">{{ __('Atras') }}</a>
                             </div>
                             <div class="col-md-6" align="right">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-oval btn-primary">
                                     {{ __('Editar') }}
                                 </button>
                                     

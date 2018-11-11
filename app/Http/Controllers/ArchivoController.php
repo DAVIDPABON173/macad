@@ -4,10 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Archivo;
 use App\Categoria;
+use App\Utility\Respuesta;
+use App\Utility\Util;
 use Illuminate\Http\Request;
 
 class ArchivoController extends Controller
 {
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +28,7 @@ class ArchivoController extends Controller
      */
     public function index()
     {
-        $archivos = Archivo::with('documento')->paginate(4);
+        $archivos = Archivo::with('documento')->paginate(25);
         return view('archivo.index' , compact('archivos'));
     }
 
@@ -38,6 +51,7 @@ class ArchivoController extends Controller
      */
     public function store(Request $request)
     {
+
         //validacion
         $this->validate($request, [
             'referencia' => 'required|string',
@@ -48,22 +62,30 @@ class ArchivoController extends Controller
             'archivo' => 'required|file'
         ]);
 
-        $ruta = $request->file('archivo')->store('public/'.date('Y').'/'.$this->getNumeroSemana().'/documento');
+        try{
+           $ruta = $request->file('archivo')->store('public/'.date('Y').'/'.$this->getNumeroSemana().'/documento');
 
-        //Almacenamiento
-        $archivo = new Archivo;
-        $archivo->referencia = $request->referencia;
-        $archivo->nombre = $request->nombre;
-        $archivo->fecha = $request->fecha;
-        $archivo->anio = $request->anio;
-        $archivo->descripcion = $request->descripcion;
-        $archivo->ubicacion_fisica = $request->ubicacion_fisica;
-        $archivo->documento_id = $request->documento;
-        $archivo->ruta = $ruta;
-        $archivo->save();
+            //Almacenamiento
+            $archivo = new Archivo;
+            $archivo->referencia = $request->referencia;
+            $archivo->nombre = $request->nombre;
+            $archivo->fecha = $request->fecha;
+            $archivo->anio = $request->anio;
+            $archivo->descripcion = $request->descripcion;
+            $archivo->ubicacion_fisica = $request->ubicacion_fisica;
+            $archivo->documento_id = $request->documento;
+            $archivo->ruta = $ruta;
+            $archivo->save();
 
-        //Redireccionar
-        return redirect()->route('archivo.show' , $archivo);
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get(1), ' -Archivo registrado y cargado.');
+
+        }catch(QueryException $e){
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
+        }finally{
+            session()->flash($respuesta['tipo'] , $respuesta['msj']);
+            //Redireccionar
+            return redirect()->route('archivo.show', compact('archivo'));
+        }
     }
 
     /**
@@ -107,23 +129,32 @@ class ArchivoController extends Controller
             'descripcion' => 'required|string'
         ]);
 
-        if ($request->hasFile('archivo')) {
+        try{
+            if ($request->hasFile('archivo')) {
             $ruta = $request->file('archivo')->store('public/'.date('Y').'/'.$this->getNumeroSemana().'/documento');
             $archivo->ruta = $ruta;
+            }
+            //update
+            $archivo->referencia = $request->referencia;
+            $archivo->nombre = $request->nombre;
+            $archivo->fecha = $request->fecha;
+            $archivo->anio = $request->anio;
+            $archivo->descripcion = $request->descripcion;
+            $archivo->ubicacion_fisica = $request->ubicacion_fisica;
+            $archivo->documento_id = $request->documento;
+            $archivo->save();
+
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get(3, ' -Archivo Actualizado.'));
+        
+        }catch(QueryException $e){
+        
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
+        
+        }finally{
+            session()->flash($respuesta['tipo'] , $respuesta['msj']);
+            //Redireccionar
+            return redirect()->route('archivo.show',  compact('archivo'));
         }
-
-        //update
-        $archivo->referencia = $request->referencia;
-        $archivo->nombre = $request->nombre;
-        $archivo->fecha = $request->fecha;
-        $archivo->anio = $request->anio;
-        $archivo->descripcion = $request->descripcion;
-        $archivo->ubicacion_fisica = $request->ubicacion_fisica;
-        $archivo->documento_id = $request->documento;
-        $archivo->save();
-
-        //Redireccionar
-        return redirect()->route('archivo.show' , $archivo);
     }
 
     /**

@@ -6,17 +6,13 @@
         <div class="col-md-16">
             <div class="card">
                 <div class="card-header" align="center"><strong>LISTA DE CATEGORIAS</strong></div>
-
-                    <div class="alert alert-success" role="alert">
-                            <strong>{{ __('*Registros de Categorias*  - En esta vista, podras optener información de las categorias existentes en MACAD') }}</strong>
-                    </div>
-
+                    <p><strong>-En esta vista, podras obtener información las categorias existentes en MACAD</strong></p>
                     <table class="table table-striped">
-                      <thead>
+                      <thead  align="center">
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">ID</th>
-                          <th scope="col">NOMBRE CATEGORIA</th>
+                          <th scope="col">CATEGORIA</th>
                           <th scope="col">DESCRIPCION</th>
                           <th scope="col">CREADO</th>
                           <th scope="col">MODIFICADO</th>
@@ -24,7 +20,7 @@
                           <th scope="col">DOCUMENTOS</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody  align="center">
                         <?php $i=1; ?>
                         @foreach($categorias as $categoria)
                         <tr>
@@ -36,13 +32,13 @@
                           <td>{{ $categoria->updated_at }}</td>
                           <td>  
                             <form method="GET" action="{{ route('categoria.show' , $categoria->id) }}" name="show_form">
-                                <button type="submit" class="btn btn-info"> {{ __('VER MAS') }}</button>                            
+                                <button type="submit" class="btn btn-oval btn-info"> {{ __('VER') }}</button>                            
                                 {{ csrf_field() }}
                             </form>
                           </td>
                           <td>  
                             <form method="GET" action="{{ route('categoria.misDocumentos' , $categoria->id) }}" name="show_form">
-                                <button type="submit" class="btn btn-success"> {{ __('LISTAR DOCUMENTOS') }}</button>                            
+                                <button type="submit" class="btn btn-oval btn-primary"> {{ __('LISTAR DOCUMENTOS') }}</button>                            
                                 {{ csrf_field() }}
                             </form>
                           </td>

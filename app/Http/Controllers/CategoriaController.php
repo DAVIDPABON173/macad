@@ -4,10 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Categoria;
 use App\Documento;
+use App\Utility\Respuesta;
+use App\Utility\Util;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class CategoriaController extends Controller
 {
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -43,13 +55,24 @@ class CategoriaController extends Controller
             'descripcion' => 'required|string'
         ]);
 
-        //Almacenamiento
-        $categoria = new Categoria;
-        $categoria->categoria = $request->categoria;
-        $categoria->save();
+        try{
+            //Almacenamiento
+            $categoria = new Categoria;
+            $categoria->categoria = $request->categoria;
+            $categoria->descripcion = $request->descripcion;
+            $categoria->save();
 
-        //Redireccionar
-        return redirect()->route('categoria.show' , $categoria);
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get(1), ' -Categoría registrada.');
+        
+        }catch(QueryException $e){
+
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
+        }finally{
+            session()->flash($respuesta['tipo'] , $respuesta['msj']);
+            //Redireccionar
+            return redirect()->route('categoria.create');
+        }
+        
     }
 
     /**
@@ -89,13 +112,24 @@ class CategoriaController extends Controller
             'descripcion' => 'required|string'
         ]);
 
-        //update
-        $categoria->categoria = $request->categoria;
-        $categoria->descripcion = $request->descripcion;
-        $categoria->save();
+        try{
+            //update
+            $categoria->categoria = $request->categoria;
+            $categoria->descripcion = $request->descripcion;
+            $categoria->save();
 
-        //Redireccionar
-        return redirect()->route('categoria.show' , $categoria);
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get(3, ' -Categoría Actualizada.'));
+        
+        }catch(QueryException $e){
+        
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
+        
+        }finally{
+            session()->flash($respuesta['tipo'] , $respuesta['msj']);
+            //Redireccionar
+            return redirect()->route('categoria.show',  compact('categoria'));
+        }
+        
     }
 
     /**

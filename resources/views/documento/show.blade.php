@@ -8,10 +8,7 @@
                 <div class="card-header">{{ __('DETALLES DE TIPO DOCUMENTO') }}</div>
 
                 <div class="card-body">
-                    <div class="alert alert-info" role="alert">
-                            <strong>{{ __('A continuación, se presenta informacion del tipo de documento seleccionado.') }}</strong>
-                    </div>
-
+                   
                     <form method="GET" action="{{ route('documento.edit' , $documento->id) }}">
                         @csrf
 

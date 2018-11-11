@@ -8,9 +8,7 @@
                 <div class="card-header">{{ __('EDITAR CATEGORIA') }}</div>
 
                 <div class="card-body">
-                    <div class="alert alert-info" role="alert">
-                            <strong>{{ __('*IMPORTANTE* ´Sí modifica los datos de una categoría, los cambios de veran reflejados en todos los archivos registrados que se relacionan con este.') }}</strong>
-                    </div>
+                    <p class="alert alert-danger">{{ __('*IMPORTANTE* ´Al modificar los datos de una categoría, los cambios se verán reflejados en todos los archivos registrados que se relacionan con este.') }}</p>
                     
                     <form method="POST" action="{{ route('categoria.show' , $categoria->id) }}">
                         @csrf
@@ -45,10 +43,10 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6" align="left">
-                                <a href="{{ route('categoria.show' , $categoria->id) }}" class="btn btn-danger">{{ __('Cancelar') }}</a>
+                                <a href="{{ route('categoria.show' , $categoria->id) }}" class="btn btn-oval btn-danger">{{ __('Cancelar') }}</a>
                             </div>
                             <div class="col-md-6" align="right">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-oval btn-primary">
                                     {{ __('Actualizar') }}
                                 </button>
                                     

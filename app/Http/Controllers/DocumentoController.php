@@ -5,10 +5,23 @@ namespace App\Http\Controllers;
 use App\Documento;
 use App\Categoria;
 use App\Archivo;
+use App\Utility\Respuesta;
+use App\Utility\Util;
 use Illuminate\Http\Request;
 
 class DocumentoController extends Controller
 {
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +29,7 @@ class DocumentoController extends Controller
      */
     public function index()
     {
-        $documentos = Documento::with('categoria')->get();
-        $documentos = Documento::paginate(4);
+        $documentos = Documento::with('categoria')->paginate(15);
         return view('documento.index' , compact('documentos'));
     }
 
@@ -47,15 +59,24 @@ class DocumentoController extends Controller
             'prefijo' => 'required|string'
         ]);
 
-        //Almacenamiento
-        $documento = new Documento;
-        $documento->categoria_id = $request->categoria_id;
-        $documento->documento = $request->documento;
-        $documento->prefijo = $request->prefijo;
-        $documento->save();
+        try{
+            //Almacenamiento
+            $documento = new Documento;
+            $documento->categoria_id = $request->categoria_id;
+            $documento->documento = $request->documento;
+            $documento->prefijo = $request->prefijo;
+            $documento->save();
 
-        //Redireccionar
-        return redirect()->route('documento.show', compact($documento));
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get(1), ' -Tipo de Documento registrado.');
+        
+        }catch(QueryException $e){
+
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
+        }finally{
+            session()->flash($respuesta['tipo'] , $respuesta['msj']);
+            //Redireccionar
+            return redirect()->route('documento.show', compact('documento'));
+        }
     }
 
     /**
@@ -97,14 +118,22 @@ class DocumentoController extends Controller
             'prefijo' => 'required|string'
         ]);
 
-        //Almacenamiento
-        $documento->categoria_id = $request->categoria_id;
-        $documento->documento = $request->documento;
-        $documento->prefijo = $request->prefijo;
-        $documento->save();
+        try{
+           //Almacenamiento
+            $documento->categoria_id = $request->categoria_id;
+            $documento->documento = $request->documento;
+            $documento->prefijo = $request->prefijo;
+            $documento->save();
 
-        //Redireccionar
-        return redirect()->route('documento.show', compact('documento'));
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get(3, ' -Tipo de Documento Actualizado.'));
+        
+        }catch(QueryException $e){
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
+        }finally{
+            session()->flash($respuesta['tipo'] , $respuesta['msj']);
+            //Redireccionar
+            return redirect()->route('documento.show',  compact('documento'));
+        }
     }
 
     /**
@@ -123,10 +152,19 @@ class DocumentoController extends Controller
      * Metodo que lista todos loos documentos que pertenecen a una categoria
      * @return \Illuminate\Http\Response
      */
-    public function misArchivos(Categoria $documento)
+    public function misArchivos(Documento $documento)
     {
-        $archivos = Archivo::where(['documento_id' => $documento->id])->paginate(4);
-        return view('archivo.index' , compact('archivos'));
+        $archivos = Archivo::where(['documento_id' => $documento->id])->paginate(25);
+
+        if(sizeof($archivos)>0){
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get(2, ' -Lista de archivos de Tipo: '.$documento->documento));
+            session()->flash($respuesta['tipo'] , $respuesta['msj']);
+            return view('archivo.index' , compact('archivos'));
+        }
+        $respuesta=Util::getRespuestaFlash(Respuesta::get(0, ' -Sin archivos cargados de tipo: '.$documento->documento));
+        session()->flash($respuesta['tipo'] , $respuesta['msj']);
+        //Redireccionar
+        return redirect()->route('documento.index');
     }
 
 

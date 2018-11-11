@@ -16,6 +16,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -28,51 +29,70 @@
         @guest
                             
         @else
-            <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-                <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'MACAD') }}
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
-
-                        </ul>
-
-                        <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">                        
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        @endguest
+        <header class="header">
+            <div class="header-block header-block-collapse d-lg-none d-xl-none">
+                <button class="collapse-btn" id="sidebar-collapse-btn">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            
+            <div class="header-block header-block-nav">
+                <ul class="nav-profile">
+                    <li class="notifications new">
+                    </li>
+                    <li class="profile dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <div class="img" style="background-image: url('https://avatars3.githubusercontent.com/u/3959008?v=3&s=40')"> </div>
+                            <span class="name"> JESUS DAVID PABON</span>
+                        </a>
+                        <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <a class="dropdown-item" href="login.html">
+                                <i class=""></i> Logout </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
 
         
+        <aside class="sidebar">
+            <div class="sidebar-container">
+                <div class="sidebar-header">
+                    <div class="brand">
+                        <div class="logo">
+                        </div> MACAD </div>
+                </div>
+                <nav class="menu">
+                    <ul class="sidebar-menu metismenu" id="sidebar-menu">
+                        <li>
+                            <a href="{{ route('categoria.index') }}">
+                                <i class=""></i> Categoría </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('documento.index') }}">
+                                <i class=""></i> Tipos de Documentos </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('archivo.index') }}">
+                                <i class=""></i> Archivos </a>
+                        </li>
+                       
+                    </ul>
+                </nav>
+            </div>
+        </aside>   
         <main class="py-4">
-            @yield('content')
-        </main>
+            <div class="col-md-12" >
+                @include('fragment.respuesta')  
+                @yield('content')  
+            </div>
+            
+        </main> 
+        @endguest
+        
     </div>
+    
+
     @yield('foot')
 </body>
 </html>
