@@ -84,6 +84,23 @@
                                 <input id="ubicacion_fisica" type="text" class="form-control{{ $errors->has('ubicacion_fisica') ? ' is-invalid' : '' }}" name="ubicacion_fisica" value="{{ $archivo->ubicacion_fisica }}" readonly="readonly">
 
                             </div>
+                        </div> 
+
+                        <div class="form-group row">
+                            <label for="created_at" class="col-md-4 col-form-label text-md-right">{{ __('Resgistrado en sistema') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="created_at" type="text" class="form-control{{ $errors->has('created_at') ? ' is-invalid' : '' }}" name="created_at" value="{{ $archivo->created_at }}" readonly="readonly">
+                            </div>
+                        </div> 
+
+                        <div class="form-group row">
+                            <label for="updated_at" class="col-md-4 col-form-label text-md-right">{{ __('Última modificación') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="updated_at" type="text" class="form-control{{ $errors->has('updated_at') ? ' is-invalid' : '' }}" name="updated_at" value="{{ $archivo->updated_at }}" readonly="readonly">
+
+                            </div>
                         </div>   
 
                         <div class="form-group row">

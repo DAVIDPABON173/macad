@@ -28,7 +28,7 @@ class ArchivoController extends Controller
      */
     public function index()
     {
-        $archivos = Archivo::with('documento')->paginate(25);
+        $archivos = Archivo::with('documento')->paginate(7);
         return view('archivo.index' , compact('archivos'));
     }
 

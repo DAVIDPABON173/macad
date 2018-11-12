@@ -1,26 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-16">
-            <div class="card">
-                <div class="card-header" align="center"><strong>LISTA DE ARCHIVOS</strong></div>
-                    <p><strong>En esta vista, podras optener información sobre los archivos cargados en MACAD</strong></p>
-                    <table class="table table-striped">
+
+<div class="title-block">
+    <div>
+      <h3 class="title">LISTA DE ARCHIVOS</h3>
+      <p>En esta vista, podras optener información sobre los archivos cargados en MACAD</p>
+    </div>
+    <div class="alert alert-warning" align="center">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        asdfgfdsdfdsdfdsdsdds asdfgfdsdfdsdfdsdsdds asdfgfdsdfdsdfdsdsdds asdfgfdsdfdsdfdsdsdds
+    </div>
+</div>
+<section class="section">
+  <div class="row sameheight-container">
+      <div class="col-md-12">
+          <div class="card sameheight-item">
+              <div class="card-block">
+                  <section class="section">
+                    <table class="table-responsive table-striped">
                       <thead  align="center">
                         <tr>
                           <th scope="col">#</th>
-                          <th scope="col">ID</th>
                           <th scope="col">TIPO DOCUMENTO</th>
                           <th scope="col">PREFIJO</th>
                           <th scope="col">REFERENCIA</th>
-                          <th scope="col">NOMBRE</th>
+                          <th scope="col">NOMBRE ARCHIVO</th>
                           <th scope="col">AÑO</th>
-                          <th scope="col">DESCRIPCIÓN</th>
                           <th scope="col">UBICACION</th>
-                          <th scope="col">CREADO</th>
-                          <th scope="col">MODIFICADO</th>
+                          <th scope="col">REGISTRADO</th>
                           <th scope="col">VER</th>
                           <th scope="col">BORRAR</th>
                         </tr>
@@ -30,16 +38,13 @@
                         @foreach($archivos as $archivo)
                         <tr>
                           <th scope="row">{{$i}}</th>
-                          <td>{{ $archivo->id }}</td>
                           <td>{{ $archivo->documento->documento }}</td>
                           <td>{{ $archivo->documento->prefijo }}</td>
                           <td>{{ $archivo->referencia }}</td>
                           <td>{{ $archivo->nombre }}</td>
                           <td>{{ $archivo->anio }}</td>
-                          <td>{{ $archivo->descripcion }}</td>
                           <td>{{ $archivo->ubicacion_fisica }}</td>
                           <td>{{ $archivo->created_at }}</td>
-                          <td>{{ $archivo->updated_at }}</td>
                           <td>  
                             <form method="GET" action="{{ route('archivo.show' , $archivo->id) }}" name="show_form">
                                 <button type="submit" class="btn btn-oval btn-info"> {{ __('VER') }}</button>                            
@@ -60,18 +65,19 @@
                       </tbody>
                       {{ $archivos->links() }}
                     </table>
-                <div class="card-body">
+                  </section>
+                  <section class="section">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                  </section>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
 @endsection
 
 
