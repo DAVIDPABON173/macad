@@ -1,14 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('REGISTRAR CATEGORIA') }}</div>
-
-                <div class="card-body">
-                    
+<div class="title-block">
+    <div class="row">
+      <div class="col-md-8">
+      <h3 class="title">{{ __('REGISTRAR CATEGORIA') }}</h3>
+      <p>{{ __('A continuación, ingrese los datos básico para la creación de una categoría.') }}</p>
+      </div>
+      <div class="col-md-4" align="right">
+            <form method="GET" action="{{ route('categoria.index') }}">
+                <button type="submit" class="btn btn-oval btn-primary"> {{ __('IR A LA LISTA DE CATEGORIAS') }}</button>
+                {{ csrf_field() }}
+            </form>
+      </div>
+    </div>
+</div>
+<section class="section">
+  <div class="row sameheight-container">
+      <div class="col-md-12">
+          <div class="card sameheight-item">
+              <div class="card-block">
+                  <section class="section">
                     <form method="POST" action="{{ route('categoria.store') }}">
                         @csrf
                         
@@ -42,16 +54,25 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-9 offset-md-2" align="right">
                                 <button type="submit" class="btn btn-oval btn-primary">
                                     {{ __('Registrar Categoria') }}
                                 </button>
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                  </section>
+                  <section class="section">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                  </section>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
 @endsection

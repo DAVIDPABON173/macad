@@ -1,21 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('REGISTRAR TIPO DOCUMENTO') }}</div>
-
-                <div class="card-body">
+<div class="title-block">
+    <div class="row">
+      <div class="col-md-8">
+      <h3 class="title">{{ __('REGISTRAR TIPO DE DOCUMENTO') }}</h3>
+      <p>{{ __('Por medio de esta vista, crearemos un nuevo tipo de documento y lo asociaremos a una categoría. Por favor, complete los campos que se presentan a continuación y verifique la categoría en donde creará el nuevo tipo de documento.') }}</p>
+      </div>
+      <div class="col-md-4" align="right">
+            <form method="GET" action="{{ route('documento.index') }}">
+                <button type="submit" class="btn btn-oval btn-primary"> {{ __('IR A LA LISTA DE DOCUMENTOS') }}</button>
+                {{ csrf_field() }}
+            </form>
+      </div>
+    </div>
+</div>
+<section class="section">
+  <div class="row sameheight-container">
+      <div class="col-md-12">
+          <div class="card sameheight-item">
+              <div class="card-block">
+                  <section class="section">
                     <form method="POST" action="{{ route('documento.store') }}">
                         @csrf
-
-                        <div class="form-group row">
-                            <label for="informacion" class="col-md-12 col-form-label text-md-center">
-                                <strong>{{ __('Por favor, complete los campos que se presentan a continuación y verifique la categoría en donde creará el nuevo tipo de documento.') }}</strong>
-                            </label>
-                        </div>
 
                         <div class="form-group row">
                             <label for="categoria" class="col-md-4 col-form-label text-md-right">{{ __('Categoría') }}</label>
@@ -32,7 +39,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="documento" class="col-md-4 col-form-label text-md-right">{{ __('Documento') }}</label>
+                            <label for="documento" class="col-md-4 col-form-label text-md-right">{{ __('Tipo Documento') }}</label>
 
                             <div class="col-md-6 row">
                                 <input id="documento" type="text" class="col-md-8 form-control{{ $errors->has('documento') ? ' is-invalid' : '' }}" name="documento" value="{{ old('documento') }}" required autofocus>
@@ -60,16 +67,24 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-9 offset-md-2" align="right">
                                 <button type="submit" class="btn btn-oval btn-primary">
                                     {{ __('Registrar Tipo Documento') }}
                                 </button>
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                  </section>
+                  <section class="section">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                  </section>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
 @endsection

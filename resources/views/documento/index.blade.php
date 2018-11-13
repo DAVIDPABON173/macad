@@ -1,22 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-16">
-            <div class="card">
-                <div class="card-header" align="center"><strong>TIPOS DE DOCUMENTOS</strong></div>
-                    <p><strong>En esta vista, podras optener información de los Documentos existentes en MACAD</strong></p>
-                    <table class="table table-striped" align="center">
+<div class="title-block">
+    <div class="row">
+      <div class="col-md-8">
+      <h3 class="title">TIPOS DE DOCUMENTOS</h3>
+      <p>En esta vista, podras optener información de los Documentos existentes en MACAD</p>
+      </div>
+      <div class="col-md-4" align="right">
+        <form method="GET" action="{{ route('documento.create') }}">
+            <button type="submit" class="btn btn-oval btn-primary"> {{ __('NUEVO TIPO DOCUMENTO +') }}</button>
+            {{ csrf_field() }}
+        </form>
+      </div>
+    </div>
+</div>
+<section class="section">
+  <div class="row sameheight-container">
+      <div class="col-md-12">
+          <div class="card sameheight-item">
+              <div class="card-block">
+                  <section class="section">
+                    <table class="table table-responsive table-bordered" align="center">
                       <thead align="center">
                         <tr >
                           <th scope="col">#</th>
-                          <th scope="col">ID</th>
                           <th scope="col">TIPO DOCUMENTO</th>
                           <th scope="col">PREFIJO</th>
                           <th scope="col">CATEGORIA</th>
                           <th scope="col">CREADO</th>
-                          <th scope="col">MODIFICADO</th>
                           <th scope="col">DETALLES</th>
                           <th scope="col">ARCHIVOS</th>
                           <th scope="col">BORRAR</th>
@@ -27,12 +39,10 @@
                         @foreach($documentos as $documento)
                         <tr>
                           <th scope="row">{{$i}}</th>
-                          <td>{{ $documento->id }}</td>
                           <td>{{ $documento->documento }}</td>
                           <td>{{ $documento->prefijo }}</td>
                           <td>{{ $documento->categoria->categoria }}</td>
-                          <td>{{ $documento->created_at }}</td>
-                          <td>{{ $documento->updated_at }}</td>
+                          <td>{{ $documento->created_at->format('d-m-Y') }}</td>
                           <td>  
                             <form method="GET" action="{{ route('documento.show' , $documento->id) }}" name="show_form">
                                 <button type="submit" class="btn btn-oval btn-info"> {{ __('VER') }}</button>                            
@@ -41,7 +51,7 @@
                           </td>
                           <td>  
                             <form method="GET" action="{{ route('documento.misArchivos' , $documento->id) }}" name="show_form">
-                                <button type="submit" class="btn btn-oval btn-primary"> {{ __('VER ARCHIVOS') }}</button>                            
+                                <button type="submit" class="btn btn-oval btn-primary"> {{ __('LISTAR ARCHIVOS') }}</button>                            
                                 {{ csrf_field() }}
                             </form>
                           </td>
@@ -59,18 +69,19 @@
                       </tbody>
                       {{ $documentos->links() }}
                     </table>
-                <div class="card-body">
+                  </section>
+                  <section class="section">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                  </section>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
 @endsection
 
 

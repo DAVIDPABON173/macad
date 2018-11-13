@@ -1,19 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('REGISTRAR ARCHIVO') }}</div>
-
-                <div class="card-body">
-                    
-                    <div class="alert alert-info" role="alert">
-                        <strong>{{ __('A continuación, ingrese los datos básico del archivo a cargar según la categoría seleccionada.') }}</strong>
-                    </div>
-                        
-                    
+<div class="title-block">
+    <div class="row">
+      <div class="col-md-8">
+          <h3 class="title">{{ __('REGISTRAR ARCHIVO') }}</h3>
+          <p>{{ __('A continuación, ingrese los datos básico del archivo a cargar según la categoría seleccionada.') }}</p>
+      </div>
+      <div class="col-md-4" align="right">
+            <form method="GET" action="{{ route('archivo.index') }}">
+                <button type="submit" class="btn btn-oval btn-primary"> {{ __('IR A LA LISTA DE ARCHIVOS') }}</button>
+                {{ csrf_field() }}
+            </form>
+      </div>        
+    </div>
+</div>
+<section class="section">
+  <div class="row sameheight-container">
+      <div class="col-md-12">
+          <div class="card sameheight-item">
+              <div class="card-block">
+                  <section class="section">
                     <form method="POST" action="{{ route('archivo.store') }}"
                     enctype="multipart/form-data">
                         @csrf
@@ -34,7 +41,7 @@
                             <label for="documento" class="col-md-4 col-form-label text-md-right">{{ __('Documento') }}</label>
                             <div class="dropdown col-md-6" >
                                 <select id="documento" name="documento" class="form-control" onchange="setPrefix()">
-                                    <option value="null" disabled selected>Documentos</option>                             
+                                    <option value="null" disabled selected>Tipo Documento</option>                             
                                 </select>
                             </div>
                         </div>
@@ -144,17 +151,25 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                        <div class="form-group row">
+                            <div class="col-md-9 offset-md-2" align="right">
                                 <button type="submit" class="btn btn-oval btn-primary">
                                     {{ __('Registrar Archivo') }}
                                 </button>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                  </section>
+                  <section class="section">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                  </section>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
 @endsection
+

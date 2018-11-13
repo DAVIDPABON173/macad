@@ -7,6 +7,7 @@ use App\Categoria;
 use App\Utility\Respuesta;
 use App\Utility\Util;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class ArchivoController extends Controller
 {
@@ -28,7 +29,7 @@ class ArchivoController extends Controller
      */
     public function index()
     {
-        $archivos = Archivo::with('documento')->paginate(7);
+        $archivos = Archivo::with('documento')->paginate(15);
         return view('archivo.index' , compact('archivos'));
     }
 
@@ -54,6 +55,7 @@ class ArchivoController extends Controller
 
         //validacion
         $this->validate($request, [
+            'documento' => 'required|integer', 
             'referencia' => 'required|string',
             'nombre' => 'required|string',
             'fecha' => 'required|date',
@@ -77,14 +79,17 @@ class ArchivoController extends Controller
             $archivo->ruta = $ruta;
             $archivo->save();
 
-            $respuesta=  Util::getRespuestaFlash(Respuesta::get(1), ' -Archivo registrado y cargado.');
-
-        }catch(QueryException $e){
-            $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
-        }finally{
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get(1, ' -Archivo registrado y cargado.'));
             session()->flash($respuesta['tipo'] , $respuesta['msj']);
             //Redireccionar
-            return redirect()->route('archivo.show', compact('archivo'));
+            return redirect()->route('archivo.show' , $archivo->id);
+
+        }catch(QueryException $e){
+
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
+            session()->flash($respuesta['tipo'] , $respuesta['msj']);
+            //Redireccionar
+            return redirect()->route('archivo.create');
         }
     }
 

@@ -18,7 +18,7 @@ class Respuesta{
 		-1 => [
 			'codigo' => -1, 
 			'msj' => 'No se puede realizar el registro.',
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		2 => [
 			'codigo' => 2, 
@@ -28,7 +28,7 @@ class Respuesta{
 		-2 => [
 			'codigo' => -2, 
 			'msj' => 'No se puede realizar la consulta, intente de nuevo.', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		3 => [
 			'codigo' => 3, 
@@ -38,7 +38,7 @@ class Respuesta{
 		-3 => [
 			'codigo' => -3, 
 			'msj' => 'No se puede realizar la modificación.',
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		4 => [
 			'codigo' => 4, 
@@ -48,7 +48,7 @@ class Respuesta{
 		-4 => [
 			'codigo' => -4, 
 			'msj' => 'No se puede realizar la eliminación.', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		5 => [
 			'codigo' => 5, 
@@ -58,7 +58,7 @@ class Respuesta{
 		-5 => [
 			'codigo' => -5, 
 			'msj' => 'Correo no existe en registro.', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		6 => [
 			'codigo' => 6, 
@@ -75,21 +75,6 @@ class Respuesta{
 			'msj' => 'Los atributos no fueron alterados.', 
 			'tipo' => 'warning'
 		],
-		9 => [
-			'codigo' => 9, 
-			'msj' => '', 
-			'tipo' => 'warning'
-		],
-		10 => [
-            'codigo' => 10,
-            'msj' => '',
-            'tipo' => 'success'
-        ],
-        11 => [
-            'codigo' => 11,
-            'msj' => '',
-            'tipo' => 'warning'
-        ],
 		12 => [
 		    'codigo' => 12,
             'msj' => 'No existen registros asociados al criterio de busqueda.',
@@ -100,16 +85,6 @@ class Respuesta{
             'msj' => 'Acción no permitida.',
             'tipo' => 'warning'
         ],
-        14 => [
-            'codigo' => 14,
-            'msj' => '',
-            'tipo' => 'success'
-        ],
-        15 => [
-            'codigo' => 15,
-            'msj' => '',
-            'tipo' => 'warning'
-        ],
         16 => [
             'codigo' => 16,
             'msj' => 'Consulta Exitosa.',
@@ -118,67 +93,57 @@ class Respuesta{
 		102 => [
 			'codigo' => 102, 
 			'msj' => 'Datos erróneos.', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		103 => [
 			'codigo' => 103, 
 			'msj' => 'Las contraseñas no coinciden.', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		104 => [
 			'codigo' => 104, 
 			'msj' => 'No se puede procesar la solicitud.',
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		105 => [
 			'codigo' => 105, 
 			'msj' => 'Correo no válido.', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		106 => [
 			'codigo' => 106, 
 			'msj' => 'El archivo no es de la extensión permitida.', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		107 => [
 			'codigo' => 107, 
 			'msj' => 'Archivo con error.', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		108 => [
 			'codigo' => 108, 
 			'msj' => 'Faltan datos para la solicitud', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		109 => [
 			'codigo' => 109, 
 			'msj' => 'Ha ocurrido un error inesperado.', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		110 => [
 			'codigo' => 110, 
 			'msj' => 'Accion NO realizada con exito.', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		111 => [
 			'codigo' => 111, 
 			'msj' => 'Acceso permitido.', 
 			'tipo' => 'success'
 		],
-		112 => [
-			'codigo' => 112, 
-			'msj' => '', 
-			'tipo' => 'success'
-		],
-		113 => [
-			'codigo' => 113, 
-			'msj' => '', 
-			'tipo' => 'warning'
-		],
 		114 => [
 			'codigo' => 114, 
-			'msj' => 'Error con el archivo. Favor Verifique el tamaño y formato.', 
-			'tipo' => 'Error'
+			'msj' => 'error con el archivo. Favor Verifique el tamaño y formato.', 
+			'tipo' => 'error'
 		],
 		115 => [
 			'codigo' => 115, 
@@ -188,7 +153,7 @@ class Respuesta{
 		116 => [
 			'codigo' => 116, 
 			'msj' => 'Su estado en el sistema no permite realizar esta accion.', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
         117 => [
             'codigo' => 116,
@@ -200,30 +165,10 @@ class Respuesta{
             'msj' => 'Notificacion Enviada.',
             'tipo' => 'success'
         ],
-        119 => [
-            'codigo' => 119,
-            'msj' => '',
-            'tipo' => 'warning'
-        ],
-        120 => [
-            'codigo' => 120,
-            'msj' => '',
-            'tipo' => 'Error'
-        ],
         121 => [
             'codigo' => 121,
             'msj' => 'No tiene permisos.',
-            'tipo' => 'Error'
-        ],
-        122 => [
-            'codigo' => 122,
-            'msj' => '',
-            'tipo' => 'warning'
-        ],
-        123 => [
-            'codigo' => 123,
-            'msj' => '',
-            'tipo' => 'Error'
+            'tipo' => 'error'
         ],
         124 => [
             'codigo' => 124,
@@ -243,7 +188,7 @@ class Respuesta{
         127 => [
             'codigo' => 127,
             'msj' => 'Acción no permitida.',
-            'tipo' => 'Error'
+            'tipo' => 'error'
         ],
         128 => [
             'codigo' => 128,
@@ -263,47 +208,47 @@ class Respuesta{
 		1040 => [
 			'codigo' => 1040, 
 			'msj' => 'Demasiadas conexiones', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		1041 => [
 			'codigo' => 1041, 
 			'msj' => 'Memoria/espacio de tranpaso insuficiente', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		1048 => [
 			'codigo' => 1048, 
 			'msj' => 'Se ha enviado un campo que no puede ser vacio/Nulo', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		1052 => [
 			'codigo' =>1052 , 
 			'msj' => 'Columna/s ambigua/s en la consulta', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		1063 => [
 			'codigo' =>1063 , 
 			'msj' => 'Se especifico columna/s de forma erroneo', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		1074 => [
 			'codigo' => 1074 , 
 			'msj' => 'Longitud de columna demasiado grande para una columna', 
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		1114 => [
 			'codigo' => 1114 , 
 			'msj' => 'La tabla está llena',
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		1452 => [
 			'codigo' => 1452, 
 			'msj' => 'Inconsistencia en los datos relacionados',
-			'tipo' => 'Error'
+			'tipo' => 'error'
 		],
 		1054 => [
 			'codigo' => 1054, 
-			'msj' => 'Error se ha solicitado campo/s o columna/s desconocida/s', 
-			'tipo' => 'Error'
+			'msj' => 'error se ha solicitado campo/s o columna/s desconocida/s', 
+			'tipo' => 'error'
 		],
 		3000 => [
 			'codigo' => 3000, 
@@ -312,7 +257,7 @@ class Respuesta{
 		],
 		3001 => [
 			'codigo' => 3001, 
-			'msj' => 'Error al generar archivo Excel.', 
+			'msj' => 'error al generar archivo Excel.', 
 			'tipo' => 'error'
 		],
 		3002 => [

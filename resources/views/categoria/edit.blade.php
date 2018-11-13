@@ -1,15 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('EDITAR CATEGORIA') }}</div>
-
-                <div class="card-body">
-                    <p class="alert alert-danger">{{ __('*IMPORTANTE* ´Al modificar los datos de una categoría, los cambios se verán reflejados en todos los archivos registrados que se relacionan con este.') }}</p>
-                    
+<div class="title-block">
+    <div class="row">
+      <div class="col-md-8">
+      <h3 class="title">{{ __('EDITAR CATEGORÍA') }}</h3>
+      <p> <strong>{{ __('*IMPORTANTE*') }}</strong> {{__('Al modificar los datos de una categoría, los cambios se verán reflejados en todos los archivos registrados que se relacionan con este.') }}</strong></p>
+      </div>
+      <div class="col-md-4" align="right">
+            <form method="GET" action="{{ route('categoria.index') }}">
+                <button type="submit" class="btn btn-oval btn-primary"> {{ __('IR A LA LISTA DE CATEGORÍAS') }}</button>
+                {{ csrf_field() }}
+            </form>
+      </div> 
+    </div>
+</div>
+<section class="section">
+  <div class="row sameheight-container">
+      <div class="col-md-12">
+          <div class="card sameheight-item">
+              <div class="card-block">
+                  <section class="section">
                     <form method="POST" action="{{ route('categoria.show' , $categoria->id) }}">
                         @csrf
                         {{ method_field('PUT') }}
@@ -49,15 +60,21 @@
                                 <button type="submit" class="btn btn-oval btn-primary">
                                     {{ __('Actualizar') }}
                                 </button>
-                                    
                             </div>
-                            
                         </div>
-                    
+
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                  </section>
+                  <section class="section">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                  </section>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
 @endsection

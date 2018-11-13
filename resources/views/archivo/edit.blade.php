@@ -1,15 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('EDITAR ARCHIVO') }}</div>
-
-                <input type="hidden" name="datos" id="datos" value="{{$archivo}}">
-
-                <div class="card-body">
+<div class="title-block">
+    <div class="row">
+      <div class="col-md-8">
+      <h3 class="title">{{ __('EDITAR ARCHIVO') }}</h3>
+      <p>En esta vista, podras modificar los datos de un archivo. Una vez realizada la modificación, guarda las cambios dando clic en <strong>"Actualizar"</strong></p>
+      </div>
+      <div class="col-md-4" align="right">
+            <form method="GET" action="{{ route('archivo.index') }}">
+                <button type="submit" class="btn btn-oval btn-primary"> {{ __('IR A LA LISTA DE ARCHIVOS') }}</button>
+                {{ csrf_field() }}
+            </form>
+      </div> 
+    </div>
+</div>
+<section class="section">
+  <div class="row sameheight-container">
+      <div class="col-md-12">
+          <div class="card sameheight-item">
+              <div class="card-block">
+                  <section class="section">
                     <form method="POST" action="{{ route('archivo.update' , $archivo->id) }}"
                     enctype="multipart/form-data">
                         @csrf
@@ -37,7 +48,7 @@
                             <label for="documento" class="col-md-4 col-form-label text-md-right">{{ __('Documento') }}</label>
                             <div class="dropdown col-md-6" >
                                 <select id="documento" name="documento" class="form-control" onchange="setPrefix()">
-                                    <option value="null" disabled>Documentos</option>
+                                    <option value="null" disabled>Tipo Documento</option>
                                     <option value="{{ $archivo->documento_id }}" selected>{{ $archivo->documento->documento }}</option>
                                 </select>
                             </div>
@@ -173,10 +184,17 @@
                         </div>
                     
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                  </section>
+                  <section class="section">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                  </section>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
 @endsection
-

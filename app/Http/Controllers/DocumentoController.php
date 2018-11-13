@@ -29,7 +29,7 @@ class DocumentoController extends Controller
      */
     public function index()
     {
-        $documentos = Documento::with('categoria')->paginate(15);
+        $documentos = Documento::with('categoria')->paginate(10);
         return view('documento.index' , compact('documentos'));
     }
 
@@ -67,7 +67,7 @@ class DocumentoController extends Controller
             $documento->prefijo = $request->prefijo;
             $documento->save();
 
-            $respuesta=  Util::getRespuestaFlash(Respuesta::get(1), ' -Tipo de Documento registrado.');
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get(1,' -Tipo de Documento registrado.'));
         
         }catch(QueryException $e){
 

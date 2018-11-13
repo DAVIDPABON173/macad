@@ -3,13 +3,17 @@
 @section('content')
 
 <div class="title-block">
-    <div>
+    <div class="row">
+      <div class="col-md-8">
       <h3 class="title">LISTA DE ARCHIVOS</h3>
       <p>En esta vista, podras optener información sobre los archivos cargados en MACAD</p>
-    </div>
-    <div class="alert alert-warning" align="center">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        asdfgfdsdfdsdfdsdsdds asdfgfdsdfdsdfdsdsdds asdfgfdsdfdsdfdsdsdds asdfgfdsdfdsdfdsdsdds
+      </div>
+      <div class="col-md-4" align="right">
+        <form method="GET" action="{{ route('archivo.create') }}">
+            <button type="submit" class="btn btn-oval btn-primary"> {{ __('NUEVO +') }}</button>
+            {{ csrf_field() }}
+        </form>
+      </div>
     </div>
 </div>
 <section class="section">
@@ -18,7 +22,7 @@
           <div class="card sameheight-item">
               <div class="card-block">
                   <section class="section">
-                    <table class="table-responsive table-striped">
+                    <table class="table table-responsive table-striped">
                       <thead  align="center">
                         <tr>
                           <th scope="col">#</th>
@@ -44,7 +48,7 @@
                           <td>{{ $archivo->nombre }}</td>
                           <td>{{ $archivo->anio }}</td>
                           <td>{{ $archivo->ubicacion_fisica }}</td>
-                          <td>{{ $archivo->created_at }}</td>
+                          <td>{{ $archivo->created_at->format('d-m-Y') }}</td>
                           <td>  
                             <form method="GET" action="{{ route('archivo.show' , $archivo->id) }}" name="show_form">
                                 <button type="submit" class="btn btn-oval btn-info"> {{ __('VER') }}</button>                            

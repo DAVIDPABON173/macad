@@ -41,9 +41,10 @@
                 <header class="header">
                     <div class="header-block header-block-collapse d-lg-none d-xl-none">
                         <button class="collapse-btn" id="sidebar-collapse-btn">
-                            <i class="fa fa-bars"></i>
+                            <i class=""></i>X
                         </button>
                     </div>
+                   
                     
                     <div class="header-block header-block-nav">
                         <ul class="nav-profile">
@@ -103,7 +104,7 @@
                         <ul class="sidebar-menu metismenu" id="customize-menu">
                             <li>
                                 <a href="">
-                                    <i class="fa fa-cog"></i> TRANSEICO SAS </a>
+                                    <i class=""></i> TRANSEICO SAS </a>
                             </li>
                         </ul>
                     </footer>
@@ -112,6 +113,7 @@
                 <div class="sidebar-mobile-menu-handle" id="sidebar-mobile-menu-handle"></div>
                 <div class="mobile-menu-handle"></div>
                 <article class="content buttons-page">
+                    @include('fragment.respuesta')  
                     @yield('content')
                 </article>
                 <footer class="footer">

@@ -27,7 +27,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::paginate(10);
+        $categorias = Categoria::paginate(5);
         return view('categoria.index' , compact('categorias')); 
     }
 
@@ -62,12 +62,13 @@ class CategoriaController extends Controller
             $categoria->descripcion = $request->descripcion;
             $categoria->save();
 
-            $respuesta=  Util::getRespuestaFlash(Respuesta::get(1), ' -Categoría registrada.');
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get(1, ' -Categoría registrada.'));
+            session()->flash($respuesta['tipo'] , $respuesta['msj']);
+            //Redireccionar
+            return redirect()->route('categoria.show' , $categoria->id);
         
         }catch(QueryException $e){
-
             $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
-        }finally{
             session()->flash($respuesta['tipo'] , $respuesta['msj']);
             //Redireccionar
             return redirect()->route('categoria.create');
