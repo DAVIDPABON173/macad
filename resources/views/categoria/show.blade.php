@@ -7,13 +7,13 @@
       <h3 class="title">{{ __('INFORMACIÓN DE CATEGORÍA') }}</h3>
       <p>A continuación se presenta información sobre la categoría cargado en MACAD</p>
       </div>
-      <div class="col-md-4" align="right">
+      <div class="col-md-4">
         <form method="GET" action="{{ route('categoria.misDocumentos' , $categoria->id) }}">
-            <button type="submit" class="btn btn-oval btn-primary"> {{ __('LISTAR MIS TIPOS DOC') }}</button>
+            <button type="submit" class="btn btn-oval btn-primary col-md-auto float-right"> {{ __('LISTAR MIS TIPOS DOC') }}</button>
             {{ csrf_field() }}
         </form>
         <form method="GET" action="{{ route('categoria.create') }}">
-        <button type="submit" class="btn btn-oval btn-primary"> {{ __('NUEVA CATEGORÍA +') }}</button>
+        <button type="submit" class="btn btn-oval btn-primary col-md-auto float-right"> {{ __('NUEVA CATEGORÍA +') }}</button>
         {{ csrf_field() }}
         </form>
       </div> 
@@ -44,10 +44,10 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6" align="left">
+                            <div class="col-6" align="left">
                                 <a href="{{ route('categoria.index') }}" class="btn btn-oval btn-danger">{{ __('Atras') }}</a>
                             </div>
-                            <div class="col-md-6" align="right">
+                            <div class="col-6" align="right">
                                 <button type="submit" class="btn btn-oval btn-primary">
                                     {{ __('Editar') }}
                                 </button>

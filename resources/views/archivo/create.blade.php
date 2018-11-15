@@ -5,11 +5,11 @@
     <div class="row">
       <div class="col-md-8">
           <h3 class="title">{{ __('REGISTRAR ARCHIVO') }}</h3>
-          <p>{{ __('A continuación, ingrese los datos básico del archivo a cargar según la categoría seleccionada.') }}</p>
+          <p>{{ __('A continuación, ingrese los datos básicos del archivo a cargar según la categoría seleccionada.') }}</p>
       </div>
-      <div class="col-md-4" align="right">
+      <div class="col-md-4">
             <form method="GET" action="{{ route('archivo.index') }}">
-                <button type="submit" class="btn btn-oval btn-primary"> {{ __('IR A LA LISTA DE ARCHIVOS') }}</button>
+                <button type="submit" class="btn btn-oval btn-primary col-md-auto float-right"> {{ __('IR A LA LISTA DE ARCHIVOS') }}</button>
                 {{ csrf_field() }}
             </form>
       </div>        
@@ -152,8 +152,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-9 offset-md-2" align="right">
-                                <button type="submit" class="btn btn-oval btn-primary">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-oval btn-primary col-md-auto float-right">
                                     {{ __('Registrar Archivo') }}
                                 </button>
                             </div>

@@ -5,11 +5,11 @@
     <div class="row">
       <div class="col-md-8">
       <h3 class="title">{{ __('EDITAR TIPO DOCUMENTO') }}</h3>
-      <p>En esta vista, podras modificar los datos de un tipo De documento. Una vez realizada la modificación, guarda las cambios dando clic en <strong>"Actualizar"</strong></p>
+      <p>En esta vista, podrás modificar los datos de un tipo de documento. Una vez realizada la modificación, guarda las cambios dando clic en <strong>"Actualizar"</strong></p>
       </div>
-      <div class="col-md-4" align="right">
+      <div class="col-md-4">
             <form method="GET" action="{{ route('documento.misArchivos' , $documento->id) }}">
-                <button type="submit" class="btn btn-oval btn-primary"> {{ __('LISTAR ARCHIVOS') }}</button>
+                <button type="submit" class="btn btn-oval btn-primary col-md-auto float-right"> {{ __('LISTAR ARCHIVOS') }}</button>
                 {{ csrf_field() }}
             </form>
       </div> 
@@ -43,8 +43,8 @@
                         <div class="form-group row">
                             <label for="documento" class="col-md-4 col-form-label text-md-right">{{ __('Tipo Documento') }}</label>
 
-                            <div class="col-md-6 row">
-                                <input id="documento" type="text" class="col-md-8 form-control{{ $errors->has('documento') ? ' is-invalid' : '' }}" name="documento" value="{{ ($documento->documento) }}" required autofocus>
+                            <div class="col-md-4">
+                                <input id="documento" type="text" class="form-control{{ $errors->has('documento') ? ' is-invalid' : '' }}" name="documento" value="{{ ($documento->documento) }}" required autofocus>
 
                                 @if ($errors->has('documento'))
                                     <span class="invalid-feedback" role="alert">
@@ -57,8 +57,8 @@
                         <div class="form-group row">
                             <label for="prefijo" class="col-md-4 col-form-label text-md-right">{{ __('Defina un Prefijo') }}</label>
 
-                            <div class="col-md-6 row">
-                                <input id="prefijo" type="text" class="col-md-8 form-control{{ $errors->has('prefijo') ? ' is-invalid' : '' }}" name="prefijo" value="{{ $documento->prefijo }}" required autofocus>
+                            <div class="col-md-4">
+                                <input id="prefijo" type="text" class="form-control{{ $errors->has('prefijo') ? ' is-invalid' : '' }}" name="prefijo" value="{{ $documento->prefijo }}" required autofocus>
 
                                 @if ($errors->has('prefijo'))
                                     <span class="invalid-feedback" role="alert">
@@ -69,10 +69,10 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6" align="left">
+                            <div class="col-6" align="left">
                                 <a href="{{ route('documento.show' , $documento->id) }}" class="btn btn-oval btn-danger">{{ __('Cancelar') }}</a>
                             </div>
-                            <div class="col-md-6" align="right">
+                            <div class="col-6" align="right">
                                 <button type="submit" class="btn btn-oval btn-primary">
                                     {{ __('Actualizar') }}
                                 </button>

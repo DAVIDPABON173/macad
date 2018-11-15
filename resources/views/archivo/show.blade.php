@@ -8,13 +8,13 @@
       <h3 class="title">{{ __('INFORMACIÓN DE ARCHIVO') }}</h3>
       <p>A continuación se presenta información sobre archivo cargado en MACAD</p>
       </div>
-      <div class="col-md-4" align="right">
+      <div class="col-md-4">
         <form method="GET" action="{{ route('archivo.index') }}">
-            <button type="submit" class="btn btn-oval btn-primary"> {{ __('IR A LA LISTA DE ARCHIVOS') }}</button>
+            <button type="submit" class="btn btn-oval btn-primary col-md-auto float-right"> {{ __('IR A LA LISTA DE ARCHIVOS') }}</button>
             {{ csrf_field() }}
         </form>
         <form method="GET" action="{{ route('archivo.create') }}">
-        <button type="submit" class="btn btn-oval btn-primary"> {{ __('NUEVO +') }}</button>
+        <button type="submit" class="btn btn-oval btn-primary col-md-auto float-right"> {{ __('NUEVO +') }}</button>
         {{ csrf_field() }}
         </form>
       </div> 
@@ -126,15 +126,15 @@
                             <label for="archivo_cargado" class="col-md-4 col-form-label text-md-right">{{ __('Archivo cargado') }} </label>
 
                             <div class="col-md-6" align="center">
-                                <a class="btn btn-oval btn-danger" href="..{{ Storage::url($archivo->ruta) }}" target=”_blank” ><strong>{{ __('Ver PDF') }} </strong></a>
+                                <a class="btn btn-oval btn-danger col-md-auto" href="..{{ Storage::url($archivo->ruta) }}" target=”_blank” ><strong>{{ __('Ver PDF') }} </strong></a>
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6" align="left">
+                            <div class="col-6" align="left">
                                 <a href="{{ route('archivo.index') }}" class="btn btn-oval btn-danger">{{ __('Atras') }}</a>
                             </div>
-                            <div class="col-md-6" align="right">
+                            <div class="col-6" align="right">
                                 <button type="submit" class="btn btn-oval btn-primary">
                                     {{ __('Editar') }}
                                 </button>

@@ -9,7 +9,7 @@
       </div>
       <div class="col-md-4" align="right">
             <form method="GET" action="{{ route('documento.index') }}">
-                <button type="submit" class="btn btn-oval btn-primary"> {{ __('IR A LA LISTA DE DOCUMENTOS') }}</button>
+                <button type="submit" class="btn btn-oval btn-primary col-md-auto float-right"> {{ __('IR A LA LISTA DE DOCUMENTOS') }}</button>
                 {{ csrf_field() }}
             </form>
       </div>
@@ -27,7 +27,7 @@
                         <div class="form-group row">
                             <label for="categoria" class="col-md-4 col-form-label text-md-right">{{ __('Categoría') }}</label>
 
-                            <div class="col-md-4" >
+                            <div class="col-md-4">
                                 <select name="categoria_id" id="categoria_id" class="form-control dropdown-toggle"  required autofocus>
                                     <option value="">-- Seleccione un categoría --</option>
                                     @foreach($categorias as $categoria)
@@ -40,9 +40,8 @@
 
                         <div class="form-group row">
                             <label for="documento" class="col-md-4 col-form-label text-md-right">{{ __('Tipo Documento') }}</label>
-
-                            <div class="col-md-6 row">
-                                <input id="documento" type="text" class="col-md-8 form-control{{ $errors->has('documento') ? ' is-invalid' : '' }}" name="documento" value="{{ old('documento') }}" required autofocus>
+                            <div class="col-md-4">
+                                <input id="documento" type="text" class="form-control{{ $errors->has('documento') ? ' is-invalid' : '' }}" name="documento" value="{{ old('documento') }}" required autofocus>
 
                                 @if ($errors->has('documento'))
                                     <span class="invalid-feedback" role="alert">
@@ -55,8 +54,8 @@
                         <div class="form-group row">
                             <label for="prefijo" class="col-md-4 col-form-label text-md-right">{{ __('Defina un Prefijo') }}</label>
 
-                            <div class="col-md-6 row">
-                                <input id="prefijo" type="text" class="col-md-8 form-control{{ $errors->has('prefijo') ? ' is-invalid' : '' }}" name="prefijo" value="{{ old('prefijo') }}" required autofocus>
+                            <div class="col-md-4">
+                                <input id="prefijo" type="text" class="form-control{{ $errors->has('prefijo') ? ' is-invalid' : '' }}" name="prefijo" value="{{ old('prefijo') }}" required autofocus>
 
                                 @if ($errors->has('prefijo'))
                                     <span class="invalid-feedback" role="alert">
@@ -67,8 +66,8 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-9 offset-md-2" align="right">
-                                <button type="submit" class="btn btn-oval btn-primary">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-oval btn-primary col-md-auto float-right">
                                     {{ __('Registrar Tipo Documento') }}
                                 </button>
                             </div>

@@ -7,24 +7,27 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'MACAD') }}</title>
+    <!--<title>{{ config('app.name', 'MACAD') }}</title>-->
+    <title>MACAD</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/transeico.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/vendor.css') }}" rel="stylesheet">
     <link href="{{ asset('css/plantilla.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
 
 </head>
-<body>
+<!--round-->
+<body style="background-image: url('img/bg-3.jpg'); background-repeat: no-repeat;background-size: cover;">
     
         @guest
         <div id="app" id="app">
@@ -41,15 +44,11 @@
                 <header class="header">
                     <div class="header-block header-block-collapse d-lg-none d-xl-none">
                         <button class="collapse-btn" id="sidebar-collapse-btn">
-                            <i class=""></i>X
+                            <i class="fas fa-bars"></i>
                         </button>
                     </div>
-                   
-                    
                     <div class="header-block header-block-nav">
-                        <ul class="nav-profile">
-                            <li class="notifications new">
-                            </li>
+                        <ul class="nav-profile">                            
                             <li class="profile dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                     <div class="img" style="background-image: url('https://avatars3.githubusercontent.com/u/3959008?v=3&s=40')"> </div>
@@ -58,8 +57,9 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
+                                                    localStorage.removeItem('active');
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Cerrar Sesion') }}
+                                        <i class="fas fa-sign-out-alt"></i> {{ __('Cerrar Sesion') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -74,27 +74,25 @@
                     <div class="sidebar-container">
                         <div class="sidebar-header">
                             <div class="brand">
-                                <div class="">
-                                </div> MACAD </div>
+                                <img src="img/logo.png" class="w-25 h-auto">
+                                MACAD
+                            </div>
                         </div>
                         <nav class="menu">
                             <ul class="sidebar-menu metismenu" id="sidebar-menu">
-                                <li>
+                                <li id="categories">
                                     <a href="{{ route('categoria.index') }}">
-                                        <i class=""></i> CATEGORÍAS
-                                        <i class=""></i>
+                                        <i class="fas fa-network-wired"></i> CATEGORÍAS                                        
                                     </a>
                                 </li>
-                                <li>
+                                <li id="doc_types">
                                     <a href="{{ route('documento.index') }}">
-                                        <i class=""></i> TIPOS DE DOCUMENTOS
-                                        <i class=""></i>
+                                        <i class="fas fa-book"></i> TIPOS DE DOCUMENTOS
                                     </a>
                                 </li>
-                                <li>
+                                <li id="files">
                                     <a href="{{ route('archivo.index') }}">
-                                        <i class=""></i> ARCHIVOS
-                                        <i class=""></i>
+                                        <i class="fas fa-file-invoice"></i> ARCHIVOS
                                     </a>
                                 </li>
                             </ul>
@@ -104,7 +102,8 @@
                         <ul class="sidebar-menu metismenu" id="customize-menu">
                             <li>
                                 <a href="">
-                                    <i class=""></i> TRANSEICO SAS </a>
+                                    <i class=""></i> TRANSEICO SAS
+                                </a>
                             </li>
                         </ul>
                     </footer>

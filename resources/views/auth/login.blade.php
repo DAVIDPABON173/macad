@@ -3,13 +3,13 @@
 @section('content')
 <div class="auth-container">
     <div class="card">
-        <header class="auth-header">
+        <header class="auth-header">                        
             <h1 class="auth-title">
                 MACAD
             </h1>
         </header>
         <div class="auth-content">
-            <p class="text-center">INICIAR SESIÓN</p>
+            <!--<p class="text-center">INICIAR SESIÓN</p>-->
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
@@ -42,6 +42,7 @@
                 </div>
 
                 <div class="form-group row">
+                <!--
                     <div class="col-md-6">
                         <div class="form-check">
                             <input class="checkbox" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -51,15 +52,16 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                -->
+                    <div class="col-md-12">
                         <a class="forgot-btn pull-right" href="{{ route('password.request') }}">
                             {{ __('¿Olvidó su contraseña?') }}
                         </a>
                     </div>
                 </div>
 
-                <div class="form-group row mb-0">
-                    <div class="col-12">
+                <div class="form-group row mb-0 col-12">
+                    <div class="col-12" align="center">
                         <button type="submit" class="btn btn-primary">
                             {{ __('Iniciar') }}
                         </button>

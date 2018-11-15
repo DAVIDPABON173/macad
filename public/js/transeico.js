@@ -15,3 +15,19 @@ function setPrefix() {
 function getFileName(file, label) {	
 	$('.'+label).text($('#'+file).val().split('\\')[2]);
 }
+
+$('#sidebar-collapse-btn').on('click', function(event){
+	event.preventDefault();
+	$("#app").toggleClass("sidebar-open");
+});
+
+$('#sidebar-menu li, #doc_types, #files').on('click', function(event){		
+	localStorage.setItem('active', this.id);	
+	$("#app").removeClass("sidebar-open");	
+});
+
+$var = localStorage.getItem('active');
+console.log($var)
+if($var){
+	$("#"+$var).toggleClass("active");	
+}

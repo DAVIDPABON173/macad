@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="title-block">
     <div class="row">
       <div class="col-md-8">
       <h3 class="title">LISTA DE ARCHIVOS</h3>
       <p>En esta vista, podras optener información sobre los archivos cargados en MACAD</p>
       </div>
-      <div class="col-md-4" align="right">
+      <div class="col-md-4">
         <form method="GET" action="{{ route('archivo.create') }}">
-            <button type="submit" class="btn btn-oval btn-primary"> {{ __('NUEVO +') }}</button>
+            <button type="submit" class="btn btn-oval btn-primary col-md-auto float-right"> {{ __('NUEVO +') }}</button>
+            
             {{ csrf_field() }}
         </form>
       </div>
@@ -22,8 +22,8 @@
           <div class="card sameheight-item">
               <div class="card-block">
                   <section class="section">
-                    <table class="table table-responsive table-striped">
-                      <thead  align="center">
+                    <table class="table table-responsive-lg table-striped">
+                      <thead align="center">
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">TIPO DOCUMENTO</th>
@@ -31,13 +31,13 @@
                           <th scope="col">REFERENCIA</th>
                           <th scope="col">NOMBRE ARCHIVO</th>
                           <th scope="col">AÑO</th>
-                          <th scope="col">UBICACION</th>
+                          <th scope="col">UBICACIÓN</th>
                           <th scope="col">REGISTRADO</th>
                           <th scope="col">VER</th>
                           <th scope="col">BORRAR</th>
                         </tr>
                       </thead>
-                      <tbody  align="center"> 
+                      <tbody align="center"> 
                         <?php $i=1; ?>
                         @foreach($archivos as $archivo)
                         <tr>
@@ -57,7 +57,7 @@
                           </td>
                           <td>  
                             <form method="POST" action="{{ route('archivo.destroy' , $archivo) }}" name="delete_form">
-                                <button type="submit" class="btn btn-oval btn-danger">{{ __('X') }}</button>
+                                <button type="submit" class="btn btn-oval btn-danger"><i class="fas fa-trash-alt"></i></button>
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                             </form>
