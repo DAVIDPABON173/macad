@@ -174,6 +174,45 @@ class ArchivoController extends Controller
         return redirect()->route('archivo.index');
     }
 
+    public function find(){
+        return view('archivo.find');
+    }
+
+    public function showArchivosFind(Request $request){
+        //validacion
+        $this->validate($request, [
+            'atributo' => 'required|string',
+            'valor' => 'required|string'
+        ]);
+        try {
+            $var = Util::getColumnaArchivoTabla($request->atributo);
+            if(is_null($var)){
+                $respuesta=  Util::getRespuestaFlash(Respuesta::get(102, ' -Campo/valor desconocido'));
+                session()->flash($respuesta['tipo'] , $respuesta['msj']);
+                //Redireccionar
+                return view('archivo.find');
+            }
+            $archivos = Archivo::where($var, 'like', '%'.$request->valor.'%')->with('documento')->paginate(15);
+            if($archivos){
+                $respuesta=  Util::getRespuestaFlash(Respuesta::get(2, ' -Se encontró Archivo(s) por: "'.$request->valor.'"'));
+                session()->flash($respuesta['tipo'] , $respuesta['msj']);
+                //Redireccionar
+                return view('archivo.index' , compact('archivos'));
+            }
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get(0, ' -Sin resultados...'));
+                session()->flash($respuesta['tipo'] , $respuesta['msj']);
+                //Redireccionar
+                return view('archivo.find' );
+            
+        } catch (QueryException $e) {
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
+            session()->flash($respuesta['tipo'] , $respuesta['msj']);
+            //Redireccionar
+            return redirect()->route('archivo.find');
+        }
+    }
+
+
     /**
      * obtener el numero de semanas, segun la fecha actual.
      *
@@ -185,4 +224,7 @@ class ArchivoController extends Controller
         #w (minúscula) te devuelve el número de día dentro de la semana (0=domingo, #6=sabado)
         return $semana = date('W',  mktime(0,0,0,intval(date("m")),intval(date("d")),intval(date("Y"))));  
     }
+
+    
+    
 }

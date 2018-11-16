@@ -35,4 +35,22 @@ class Util {
         return $respuestaFlash;
     }
 
+    public static function getColumnaArchivoTabla($id){
+        if($id == 1){
+            return 'nombre';
+        }elseif($id == 2){
+            return 'referencia';
+        }elseif($id == 3){
+            return 'fecha';
+        }elseif($id == 4){
+            return 'anio';
+        }elseif($id == 5){
+            return 'descripcion';
+        }elseif($id == 6){
+            return 'ubicacion_fisica';
+        }else{
+            return null;
+        }
+    }
+
 }

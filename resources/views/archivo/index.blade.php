@@ -7,13 +7,21 @@
       <h3 class="title">LISTA DE ARCHIVOS</h3>
       <p>En esta vista, podras optener información sobre los archivos cargados en MACAD</p>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-2">
+        <form method="GET" action="{{ route('archivo.find') }}">
+            <button type="submit" class="btn btn-oval btn-info col-md-auto float-right"> {{ __('BUSCAR') }}</button>
+            
+            {{ csrf_field() }}
+        </form>
+      </div>
+      <div class="col-md-2">
         <form method="GET" action="{{ route('archivo.create') }}">
             <button type="submit" class="btn btn-oval btn-primary col-md-auto float-right"> {{ __('NUEVO +') }}</button>
             
             {{ csrf_field() }}
         </form>
       </div>
+      
     </div>
 </div>
 <section class="section">
