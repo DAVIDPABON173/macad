@@ -22,12 +22,13 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/vendor.css') }}" rel="stylesheet">
     <link href="{{ asset('css/plantilla.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/own.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
 </head>
 <!--round-->
-<body style="background-image: url('img/bg-3.jpg'); background-repeat: no-repeat;background-size: cover;">
+<body style="background-image: url('http://localhost/macad/public/img/bg-3.jpg'); background-repeat: no-repeat;background-size: cover;">
     
         @guest
         <div id="app" id="app">
@@ -74,7 +75,7 @@
                     <div class="sidebar-container">
                         <div class="sidebar-header">
                             <div class="brand">
-                                <img src="img/logo.png" class="w-25 h-auto">
+                                <img src="http://localhost/macad/public/img/logo.png" class="w-25 h-auto">
                                 MACAD
                             </div>
                         </div>

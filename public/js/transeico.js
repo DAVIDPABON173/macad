@@ -26,8 +26,11 @@ $('#sidebar-menu li, #doc_types, #files').on('click', function(event){
 	$("#app").removeClass("sidebar-open");	
 });
 
+$('.sidebar').on('click', function(event){
+	$("#app").removeClass("sidebar-open");	
+});
+
 $var = localStorage.getItem('active');
-console.log($var)
 if($var){
 	$("#"+$var).toggleClass("active");	
 }
