@@ -124,10 +124,10 @@
                     <div class="footer-block author">
                         <ul>
                             <li> Creado Por:
-                                <a href="https://github.com/modularcode">Jesús David Pabón</a>
+                                <a href="#">Jesús David Pabón</a>
                             </li>
                             <li>
-                                <a href="">2018</a>
+                                <a href="#">2018</a>
                             </li>
                         </ul>
                     </div>

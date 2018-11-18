@@ -7,7 +7,7 @@
 	</div>
 
 @elseif(Session::has('success'))
-	<div class="alert alert-success" align="center">
+	<div class="alert alert-primary" align="center">
 		<button type="button" class="close" data-dismiss="alert">
 			&times;
 		</button>

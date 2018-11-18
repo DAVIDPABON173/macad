@@ -82,7 +82,7 @@
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                    ¿Está seguro de querer eliminar el archivo?
+                                    ¿Está seguro de querer eliminar el archivo: <strong>{{ $archivo->nombre }}</strong> ?
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-oval btn-secondary" data-dismiss="modal">Cancelar</button>

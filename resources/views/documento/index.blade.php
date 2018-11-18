@@ -71,8 +71,8 @@
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
-                                    <div class="modal-body">
-                                      ¿Está seguro de querer eliminar el tipo de documento?
+                                    <div class="modal-body" align="left">
+                                      ¿Está seguro de querer eliminar <strong>Tipo de Documento: {{ $documento->documento }}</strong>?. <br>*IMPORTANTE* Al eliminar el Tipo de Documento, <strong>TODOS</strong> sus archivos también serán eliminados.
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-oval btn-secondary" data-dismiss="modal">Cancelar</button>

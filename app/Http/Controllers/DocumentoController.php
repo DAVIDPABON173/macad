@@ -144,7 +144,21 @@ class DocumentoController extends Controller
      */
     public function destroy(Documento $documento)
     {
-        //
+        try{
+            $doc = $documento->documento;
+            //DELETE
+            if ($documento->delete()) {
+            $respuesta=Util::getRespuestaFlash(Respuesta::get(4,' -Tipo Doc: '.$doc.' eliminado. Nota: Todos sus archivos fueron eliminados'));
+            }else{
+            $respuesta=Util::getRespuestaFlash(Respuesta::get(-4,' -TIPO DOC: '.$doc));
+            }
+        }catch(QueryException $e){
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
+        }finally{
+            session()->flash($respuesta['tipo'] , $respuesta['msj']);
+            //Redireccionar
+            return redirect()->route('documento.index');
+        }
     }
 
 

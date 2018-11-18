@@ -170,8 +170,21 @@ class ArchivoController extends Controller
      */
     public function destroy(Archivo $archivo)
     {
-        $archivo->delete();
-        return redirect()->route('archivo.index');
+        try{
+            $nombre = $archivo->nombre;
+            //DELETE
+            if ($archivo->delete()) {
+            $respuesta=Util::getRespuestaFlash(Respuesta::get(4,' -Archivo: '.$nombre.' eliminado.'));
+            }else{
+            $respuesta=Util::getRespuestaFlash(Respuesta::get(-4,' -Archivo: '.$nombre));
+            }
+        }catch(QueryException $e){
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
+        }finally{
+            session()->flash($respuesta['tipo'] , $respuesta['msj']);
+            //Redireccionar
+            return redirect()->route('archivo.index');
+        }
     }
 
     public function find(){
