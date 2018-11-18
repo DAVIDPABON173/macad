@@ -57,12 +57,12 @@
                             </td>
                             <td align="center">  
                               <!-- Button trigger modal -->
-                              <button type="button" class="btn btn-oval btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                              <button type="button" class="btn btn-oval btn-danger" data-toggle="modal" data-target="#example-{{ $documento->id }}">
                                 <i class="fas fa-trash-alt"></i>
                               </button>
 
                               <!-- Modal -->
-                              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                              <div class="modal fade" id="example-{{ $documento->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header bg-warning">
