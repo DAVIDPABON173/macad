@@ -22,9 +22,13 @@ $('#sidebar-collapse-btn').on('click', function(event){
 });
 
 $('#sidebar-menu li, #doc_types, #files').on('click', function(event){		
-	localStorage.setItem('active', this.id);	
-	$("#app").removeClass("sidebar-open");	
+	sidebar(this.id);
 });
+
+function sidebar(id) {
+	localStorage.setItem('active', id);	
+	$("#app").removeClass("sidebar-open");	
+}
 
 $('.sidebar').on('click', function(event){
 	$("#app").removeClass("sidebar-open");	

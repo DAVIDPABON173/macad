@@ -9,7 +9,7 @@
       </div>
       <div class="col-md-2">
         <form method="GET" action="{{ route('archivo.find') }}">
-            <button type="submit" class="btn btn-oval btn-info col-md-auto float-right"> {{ __('BUSCAR') }}</button>
+            <button type="submit" class="btn btn-oval btn-info col-md-auto float-right"><i class="fas fa-search"></i> {{ __('BUSCAR') }}</button>
             
             {{ csrf_field() }}
         </form>

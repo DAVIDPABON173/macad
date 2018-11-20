@@ -72,5 +72,10 @@
       </div>
   </div>
 </section>
-@endsection
 
+@endsection
+@section('js')
+<script type="text/javascript">  
+  localStorage.setItem('active', 'categories');
+</script>
+@endsection

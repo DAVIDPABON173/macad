@@ -45,11 +45,11 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-6" align="left">
-                                <a href="{{ route('categoria.index') }}" class="btn btn-oval btn-danger">{{ __('Atras') }}</a>
+                                <a href="{{ route('categoria.index') }}" class="btn btn-oval btn-danger"><i class="fas fa-arrow-left"></i> {{ __('Atras') }}</a>
                             </div>
                             <div class="col-6" align="right">
                                 <button type="submit" class="btn btn-oval btn-primary">
-                                    {{ __('Editar') }}
+                                    <i class="fas fa-edit"></i> {{ __('Editar') }}
                                 </button>
                                     
                             </div>

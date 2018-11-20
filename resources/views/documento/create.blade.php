@@ -9,7 +9,7 @@
       </div>
       <div class="col-md-4" align="right">
             <form method="GET" action="{{ route('documento.index') }}">
-                <button type="submit" class="btn btn-oval btn-primary col-md-auto float-right"> {{ __('IR A LA LISTA DE DOCUMENTOS') }}</button>
+                <button id="doc_types" type="submit" class="btn btn-oval btn-primary col-md-auto float-right"> {{ __('IR A LA LISTA DE DOCUMENTOS') }}</button>
                 {{ csrf_field() }}
             </form>
       </div>
