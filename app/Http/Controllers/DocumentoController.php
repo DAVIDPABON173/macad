@@ -8,6 +8,7 @@ use App\Archivo;
 use App\Utility\Respuesta;
 use App\Utility\Util;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class DocumentoController extends Controller
 {
@@ -68,14 +69,15 @@ class DocumentoController extends Controller
             $documento->save();
 
             $respuesta=  Util::getRespuestaFlash(Respuesta::get(1,' -Tipo de Documento registrado.'));
-        
-        }catch(QueryException $e){
-
-            $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
-        }finally{
             session()->flash($respuesta['tipo'] , $respuesta['msj']);
             //Redireccionar
             return redirect()->route('documento.show', compact('documento'));
+        
+        }catch(QueryException $e){
+            $respuesta=  Util::getRespuestaFlash(Respuesta::get($e->errorInfo[1]));
+            session()->flash($respuesta['tipo'] , $respuesta['msj']);
+            //Redireccionar
+            return redirect()->route('documento.index');
         }
     }
 
